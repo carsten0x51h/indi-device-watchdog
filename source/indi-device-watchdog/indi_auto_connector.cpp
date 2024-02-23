@@ -301,13 +301,6 @@ bool IndiAutoConnectorT::areAllIndiDevicesConnected() const {
 }
 
 
-// TODO: Move function out of here
-// TODO: Make "pin 1" configurable!
-void IndiAutoConnectorT::updateOverallStatusLed(bool allAreConnected) {
-  digitalWrite(1, (allAreConnected ? 1 : 0));
-}
-
-
 void IndiAutoConnectorT::run() {
   using namespace std::chrono_literals;
 
@@ -339,8 +332,6 @@ void IndiAutoConnectorT::run() {
 
       std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
 
-      updateOverallStatusLed(areAllIndiDevicesConnected());
-      
       for (auto it = deviceConnections_.begin(); it != deviceConnections_.end(); ++it) {
 	handleDeviceConnection(it->second);
       }

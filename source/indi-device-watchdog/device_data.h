@@ -69,10 +69,6 @@ class DeviceDataT {
   int getGpioPin() const;
   void setGpioPin(int gpioPin);
 
-  DeviceConnectionStateT::TypeE getDeviceConnectionState() const;
-  void setDeviceConnectionState(DeviceConnectionStateT::TypeE deviceConnectionState);
-  
-  
   std::ostream &print(std::ostream &os) const;
 
   friend std::ostream &operator<<(std::ostream &os, const DeviceDataT &deviceData);
