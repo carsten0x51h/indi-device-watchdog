@@ -63,7 +63,6 @@ class IndiAutoConnectorT {
   void propertyRemoved(INDI::Property property);
 
 
-  void switchAllDeviceLeds(bool onOff);
   void updateOverallStatusLed(bool allAreConnected);
   bool areAllIndiDevicesConnected() const;
   void requestIndiDriverRestart(DeviceDataT & deviceData);

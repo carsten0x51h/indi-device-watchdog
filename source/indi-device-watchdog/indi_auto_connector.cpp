@@ -32,8 +32,6 @@
 #include <vector>
 #include <filesystem>
 
-#include <wiringPi.h>
-
 #include "wait_for.h"
 
 #include "indi_auto_connector.h"
@@ -41,32 +39,12 @@
 IndiAutoConnectorT::IndiAutoConnectorT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor) {
   using namespace std::chrono_literals;
 
-  // TODO: Idea... move GPIO / LED stuff completely out -> define "monitor/view" interface with init(), destroy() and status_update(DeviceDataT ...). Put all GPIO stuff inside sep class which implementes this interface... instantiate outside and pass in as "strategy" parameter (either as template traits or as ctor param)... 
-  wiringPiSetup();
-
-  // Set "overall status" LED GPIO to output
-  // TODO: Move out of here...
-  pinMode(1, OUTPUT);
-
-  
   // Process config entries to deviceConnections_
   for (auto it = devicesToMonitor.begin(); it != devicesToMonitor.end(); ++it) {
-
-    int gpioPin = it->getGpioPin();
-    pinMode(gpioPin, OUTPUT);
-    digitalWrite(gpioPin, 0);
-    
     deviceConnections_.insert( std::pair<std::string, DeviceDataT>(it->getIndiDeviceName(), *it) );
   }
 
-  // Switch on LED during start-up for 1 second
-  switchAllDeviceLeds(true);
-  std::this_thread::sleep_for(std::chrono::milliseconds(1000ms));
-  switchAllDeviceLeds(false);
-  
-  
   client_.setServer(hostname.c_str(), port);
-
   
   serverConnectionFailedListenerConnection_ = client_.registerServerConnectionFailedListener([&]() {
     std::cerr << "Connection to INDI server failed. Exiting." << std::endl;
@@ -186,13 +164,6 @@ void IndiAutoConnectorT::propertyUpdated(INDI::Property property) {
 }
 
 
-void IndiAutoConnectorT::switchAllDeviceLeds(bool onOff) {
-  for (auto it = deviceConnections_.begin(); it != deviceConnections_.end(); ++it) {
-    digitalWrite(it->second.getGpioPin(), (onOff ? 1 : 0));
-  }
-}
-
-
 void IndiAutoConnectorT::requestIndiDriverRestart(DeviceDataT & deviceData) {
   std::string driverName = deviceData.getIndiDeviceDriverName();
   
@@ -274,12 +245,6 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
   
   std::cerr << "Processing '" << indiDeviceName << "' -> Linux device exists? " << linuxDeviceExists << ", INDI device exists? " << indiDeviceExists << ", INDI device connected? " << indiDeviceConnected << " (details: " << deviceData << ")" << std::endl;
 
-  // Update LEDs
-  // TODO: Move out of he
-  int ledOnOff = (indiDeviceConnected ? 0 : 1);
-  digitalWrite(deviceData.getGpioPin(), ledOnOff);
-  
-  
   if (linuxDeviceExists) {
     // Linux device already existed before
     if (! indiDeviceExists) {

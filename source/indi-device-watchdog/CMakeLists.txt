@@ -75,7 +75,6 @@ target_link_libraries(${target}
 	${Boost_PROGRAM_OPTIONS_LIBRARY}
         ${INDI_LIBRARIES}
         ${ZLIB_LIBRARIES}
-	${WIRINGPI_LIBRARIES}
 	${DEFAULT_LINKER_OPTIONS}
         )
 
@@ -108,5 +107,4 @@ install(TARGETS ${target}
         )
 
 # IMPORTANT: Otherwise C++11 is used...
-#set_property(TARGET ${target} PROPERTY CXX_STANDARD 20)
 set_property(TARGET ${target} PROPERTY CXX_STANDARD 17)

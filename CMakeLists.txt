@@ -103,13 +103,6 @@ find_package(INDI REQUIRED)
 
 
 #
-# Find WiringPI fo GPIO / LED control
-#
-find_package(WiringPi REQUIRED)
-
-include_directories(${WIRINGPI_INCLUDE_DIRS})
-
-#
 # C++ std filesystem library
 #
 include(cmake/FindFilesystem.cmake)
