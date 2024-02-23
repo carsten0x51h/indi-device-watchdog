@@ -1,0 +1,46 @@
+{
+    "indiDevices": [
+        {
+            "indiDeviceName": "Joystick",
+            "linuxDeviceName": "\/dev\/input\/js0",
+            "indiDeviceDriverName": "indi_joystick",
+            "enableAutoConnect": "true",
+            "gpioLedPin": "6"
+        },
+        {
+            "indiDeviceName": "V4L2 CCD",
+            "linuxDeviceName": "\/dev\/video88",
+            "indiDeviceDriverName": "indi_v4l2_ccd",
+            "enableAutoConnect": "true",
+            "gpioLedPin": "11"
+        },
+        {
+            "indiDeviceName": "Atik 383L",
+            "linuxDeviceName": "\/tmp\/atik383",
+            "indiDeviceDriverName": "indi_atik_ccd",
+            "enableAutoConnect": "true",
+            "gpioLedPin": "10"
+        },
+        {
+            "indiDeviceName": "MoonLite",
+            "linuxDeviceName": "\/dev\/serial\/by-id\/usb-FTDI_FT232R_USB_UART_A900fEQB-if00-port0",
+            "indiDeviceDriverName": "indi_moonlite_focus",
+            "enableAutoConnect": "true",
+            "gpioLedPin": "26"
+        },
+        {
+            "indiDeviceName": "Atik EFW2",
+            "linuxDeviceName": "\/dev\/hidraw81",
+            "indiDeviceDriverName": "indi_atik_wheel",
+            "enableAutoConnect": "true",
+            "gpioLedPin": "31"
+        },
+        {
+            "indiDeviceName": "EQMod Mount",
+            "linuxDeviceName": "\/dev\/serial\/by-id\/usb-FTDI_FT232R_USB_UART_A800enuj-if00-port0",
+            "indiDeviceDriverName": "indi_eqmod_telescope",
+            "enableAutoConnect": "true",
+            "gpioLedPin": "5"
+        }
+    ]
+}
