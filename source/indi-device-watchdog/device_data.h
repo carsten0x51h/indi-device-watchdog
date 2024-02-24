@@ -32,7 +32,6 @@
 #include <memory>
 
 #include "basedevice.h"
-#include "indipropertyswitch.h"
 
 class DeviceDataT {
  private:

@@ -151,7 +151,7 @@ void IndiAutoConnectorT::propertyRemoved(INDI::Property property) {
 }
 
 
-void IndiAutoConnectorT::propertyUpdated(INDI::Property property) {
+void IndiAutoConnectorT::propertyUpdated(INDI::Property /*property*/) {
   
   // if (! std::strcmp(property.getName(), "CONNECTION")) {
 
