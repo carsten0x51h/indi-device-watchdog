@@ -208,7 +208,7 @@ bool IndiAutoConnectorT::sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseD
 
 #if INDI_MAJOR_VERSION < 2
 
-    ISwitchVectorProperty* connectionSwitchVec = indiBaseDevice->getSwitch("CONNECTION");
+    ISwitchVectorProperty* connectionSwitchVec = indiBaseDevice.getSwitch("CONNECTION");
 
     // TODO: Check connectionSwitchVec for nullptr...
     // TODO: Better get via propery name "CONNECT" / "DISCONNECT"? -> ISwitch * p = IUFindSwitch(vec, "CONNECT");
