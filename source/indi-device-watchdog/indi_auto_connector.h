@@ -56,7 +56,8 @@ class IndiAutoConnectorT {
   std::mutex deviceConnectionsMutex_;
 
   IndiDriverRestartManagerT indiDriverRestartManager_;
-  
+
+  INDI::BaseDevice getBaseDeviceFromProperty(INDI::Property property);  
   void addIndiDevice(INDI::BaseDevice device);
   void removeIndiDevice(INDI::BaseDevice device);
   void propertyUpdated(INDI::Property property);

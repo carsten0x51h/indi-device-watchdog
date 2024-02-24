@@ -85,6 +85,15 @@ IndiAutoConnectorT::~IndiAutoConnectorT() {
 }
 
 
+INDI::BaseDevice IndiAutoConnectorT::getBaseDeviceFromProperty(INDI::Property property) {
+#if INDI_MAJOR_VERSION < 2
+  return *property.getBaseDevice();
+#else
+  return property.getBaseDevice();
+#endif
+}
+
+
 void IndiAutoConnectorT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
   std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
@@ -122,13 +131,13 @@ void IndiAutoConnectorT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
   }
 }
 
-
 void IndiAutoConnectorT::propertyRemoved(INDI::Property property) {
 
   if (! std::strcmp(property.getName(), "CONNECTION")) {
     std::cerr << "propertyRemoved..." << std::endl;
 
-    INDI::BaseDevice indiBaseDevice = property.getBaseDevice();
+    
+    INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
     std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
     std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
@@ -147,7 +156,7 @@ void IndiAutoConnectorT::propertyUpdated(INDI::Property property) {
   
   if (! std::strcmp(property.getName(), "CONNECTION")) {
 
-    INDI::BaseDevice indiBaseDevice = property.getBaseDevice();
+    INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
     std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
     std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
