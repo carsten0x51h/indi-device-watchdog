@@ -59,36 +59,36 @@ void IndiClientT::newSwitch(ISwitchVectorProperty* svp) {
   std::string deviceName(svp->device);
   std::string propertyName(svp->name);
   INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
-  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_SWITCH);
+  INDI::Property* property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_SWITCH);
   
-  notifyUpdateProperty(property);
+  notifyUpdateProperty(*property);
 }
 
 void IndiClientT::newNumber(INumberVectorProperty* nvp) {
   std::string deviceName(nvp->device);
   std::string propertyName(nvp->name);
   INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
-  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_NUMBER);
+  INDI::Property* property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_NUMBER);
   
-  notifyUpdateProperty(property);
+  notifyUpdateProperty(*property);
 }
 
 void IndiClientT::newText(ITextVectorProperty* tvp) {
   std::string deviceName(tvp->device);
   std::string propertyName(tvp->name);
   INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
-  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_TEXT);
+  INDI::Property* property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_TEXT);
   
-  notifyUpdateProperty(property);
+  notifyUpdateProperty(*property);
 }
 
 void IndiClientT::newLight(ILightVectorProperty* lvp) {
   std::string deviceName(lvp->device);
   std::string propertyName(lvp->name);
   INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
-  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_LIGHT);
+  INDI::Property* property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_LIGHT);
   
-  notifyUpdateProperty(property);
+  notifyUpdateProperty(*property);
 }
 
 void IndiClientT::newBLOB(IBLOB* bp) {
@@ -96,9 +96,9 @@ void IndiClientT::newBLOB(IBLOB* bp) {
   std::string deviceName(blobPropVec->device);
   std::string propertyName(blobPropVec->name);
   INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
-  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_BLOB);
+  INDI::Property* property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_BLOB);
   
-  notifyUpdateProperty(property);
+  notifyUpdateProperty(*property);
 }
 
 void IndiClientT::newMessage(INDI::BaseDevice * dp, int messageID) {

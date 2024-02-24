@@ -88,5 +88,4 @@ namespace device_data_persistance {
   //   boost::property_tree::json_parser::write_json(std::cout, rootPt);
   // }
   
-};
-  
+}

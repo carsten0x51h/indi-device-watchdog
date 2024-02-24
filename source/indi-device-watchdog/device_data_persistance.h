@@ -41,6 +41,6 @@ namespace device_data_persistance {
   std::vector<DeviceDataT> load(const std::filesystem::path & configFilePath);
   void save(const std::vector<DeviceDataT> & deviceDataVec, const std::filesystem::path & configFilePath);
 
-};
+}
 
 #endif /* SOURCE_DEVICE_DATA_PERSIST_H_ */
