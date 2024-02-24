@@ -86,22 +86,14 @@ void DeviceDataT::setEnableAutoConnect(bool enableAutoConnect) {
   enableAutoConnect_ = enableAutoConnect;
 }
 
-int DeviceDataT::getGpioPin() const {
-  return gpioPin_;
-}
-
-void DeviceDataT::setGpioPin(int gpioPin) {
-  gpioPin_ = gpioPin;
-}
-
 std::ostream &
 DeviceDataT::print(std::ostream &os) const {
 
   os << "Device name: " << indiDeviceName_
      << ", linux device: " << linuxDeviceName_
      << ", INDI driver: " << indiDeviceDriverName_
-     << ", INDI device: " << (indiBaseDevice_.isValid() ? indiBaseDevice_.getDeviceName() : "NOT SET")
-     << ", GPIO pin: " << gpioPin_
+     // << ", INDI device: " << (indiBaseDevice_.isValid() ? indiBaseDevice_.getDeviceName() : "NOT SET")
+     << ", INDI device: " << (indiBaseDevice_.getDeviceName() != nullptr ? indiBaseDevice_.getDeviceName() : "NOT SET")
      << ", local INDI device conn prop: " << (indiConnectionProp_.isValid() ? (indiConnectionProp_[0].getState() == ISS_ON ? "CONNECTED" : "DISCONNECTED") : "NO PROP");
 
   return os;
