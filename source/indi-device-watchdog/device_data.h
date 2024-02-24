@@ -40,13 +40,11 @@ class DeviceDataT {
   std::string linuxDeviceName_; // NOTE: Could be party derived from PORT property, but not always. Therefore, it will be explicitly set via cfg.
   std::string indiDeviceDriverName_;
   INDI::BaseDevice indiBaseDevice_;
-  INDI::PropertySwitch indiConnectionProp_;
   bool enableAutoConnect_;
-  int gpioPin_;
   
  public:
   DeviceDataT();
-  DeviceDataT(const std::string & indiDeviceName, const std::string & linuxDeviceName, const std::string & indiDeviceDriverName, bool enableAutoConnect, int gpioPin);
+  DeviceDataT(const std::string & indiDeviceName, const std::string & linuxDeviceName, const std::string & indiDeviceDriverName, bool enableAutoConnect);
 
   std::string getIndiDeviceName() const;
   void setIndiDeviceName(std::string indiDeviceName);
@@ -60,14 +58,8 @@ class DeviceDataT {
   INDI::BaseDevice getIndiBaseDevice() const;
   void setIndiBaseDevice(INDI::BaseDevice indiBaseDevice);
 
-  INDI::PropertySwitch getIndiConnectionProp() const;
-  void setIndiConnectionProp(INDI::PropertySwitch indiConnectionProp);
-
   bool getEnableAutoConnect() const;
   void setEnableAutoConnect(bool enableAutoConnect);
-
-  int getGpioPin() const;
-  void setGpioPin(int gpioPin);
 
   std::ostream &print(std::ostream &os) const;
 

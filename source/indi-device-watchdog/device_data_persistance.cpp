@@ -53,8 +53,7 @@ namespace device_data_persistance {
 			     deviceDataPt.get<std::string>("indiDeviceName"),
 			     deviceDataPt.get<std::string>("linuxDeviceName"),
 			     deviceDataPt.get<std::string>("indiDeviceDriverName"),
-			     deviceDataPt.get<bool>("enableAutoConnect"),
-			     deviceDataPt.get<int>("gpioLedPin")
+			     deviceDataPt.get<bool>("enableAutoConnect")
 			     );
 	
 	deviceDataVec.push_back(deviceData);
@@ -78,7 +77,6 @@ namespace device_data_persistance {
   //     deviceDataPt.put<std::string>("linuxDeviceName", deviceData.getLinuxDeviceName());
   //     deviceDataPt.put<std::string>("indiDeviceDriverName", deviceData.getIndiDeviceDriverName());
   //     deviceDataPt.put<bool>("enableAutoConnect", deviceData.getEnableAutoConnect());
-  //     deviceDataPt.put<>("gpioLedPin", deviceData.getGpioPin());
 
   //     devicesPt.push_back(std::make_pair("", deviceDataPt));      
   //   }

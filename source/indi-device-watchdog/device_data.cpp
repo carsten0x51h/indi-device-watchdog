@@ -28,16 +28,15 @@
 
 #include "device_data.h"
 
-DeviceDataT::DeviceDataT() : indiConnectionProp_(INDI::PropertySwitch(2)) {
+DeviceDataT::DeviceDataT() {
   
 }
 
-DeviceDataT::DeviceDataT(const std::string & indiDeviceName, const std::string & linuxDeviceName, const std::string & indiDeviceDriverName, bool enableAutoConnect, int gpioPin) : indiConnectionProp_(INDI::PropertySwitch(2)) {
+DeviceDataT::DeviceDataT(const std::string & indiDeviceName, const std::string & linuxDeviceName, const std::string & indiDeviceDriverName, bool enableAutoConnect) {
   indiDeviceName_ = indiDeviceName;
   linuxDeviceName_ = linuxDeviceName;
   indiDeviceDriverName_ = indiDeviceDriverName;
   enableAutoConnect_ = enableAutoConnect;
-  gpioPin_ = gpioPin;
 }
 
 std::string DeviceDataT::getLinuxDeviceName() const {
@@ -72,13 +71,6 @@ void DeviceDataT::setIndiBaseDevice(INDI::BaseDevice indiBaseDevice) {
   indiBaseDevice_ = indiBaseDevice;
 }
 
-INDI::PropertySwitch DeviceDataT::getIndiConnectionProp() const {
-  return indiConnectionProp_;
-}
-void DeviceDataT::setIndiConnectionProp(INDI::PropertySwitch indiConnectionProp) {
-  indiConnectionProp_ = indiConnectionProp;
-}
-
 bool DeviceDataT::getEnableAutoConnect() const {
   return enableAutoConnect_;
 }
@@ -92,9 +84,7 @@ DeviceDataT::print(std::ostream &os) const {
   os << "Device name: " << indiDeviceName_
      << ", linux device: " << linuxDeviceName_
      << ", INDI driver: " << indiDeviceDriverName_
-     // << ", INDI device: " << (indiBaseDevice_.isValid() ? indiBaseDevice_.getDeviceName() : "NOT SET")
-     << ", INDI device: " << (indiBaseDevice_.getDeviceName() != nullptr ? indiBaseDevice_.getDeviceName() : "NOT SET")
-     << ", local INDI device conn prop: " << (indiConnectionProp_.isValid() ? (indiConnectionProp_[0].getState() == ISS_ON ? "CONNECTED" : "DISCONNECTED") : "NO PROP");
+     << ", INDI device: " << (indiBaseDevice_.getDeviceName() != nullptr ? indiBaseDevice_.getDeviceName() : "NOT SET");
 
   return os;
 }

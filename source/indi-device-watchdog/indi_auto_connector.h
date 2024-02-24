@@ -57,20 +57,20 @@ class IndiAutoConnectorT {
 
   IndiDriverRestartManagerT indiDriverRestartManager_;
 
-  INDI::BaseDevice getBaseDeviceFromProperty(INDI::Property property);  
+  static bool isDeviceValid(INDI::BaseDevice indiBaseDevice);
+  static INDI::BaseDevice getBaseDeviceFromProperty(INDI::Property property);
+  
   void addIndiDevice(INDI::BaseDevice device);
   void removeIndiDevice(INDI::BaseDevice device);
   void propertyUpdated(INDI::Property property);
   void propertyRemoved(INDI::Property property);
 
 
-  void updateOverallStatusLed(bool allAreConnected);
-  bool areAllIndiDevicesConnected() const;
   void requestIndiDriverRestart(DeviceDataT & deviceData);
   bool sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseDevice);
   bool sendIndiDeviceDisconnectRequest(INDI::BaseDevice indiBaseDevice);
   bool fileExists(const std::string & pathToFile) const;
-  bool isIndiDeviceConnected(INDI::PropertySwitch indiConnectionProp) const;
+  static bool isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice);
   void handleDeviceConnection(DeviceDataT & deviceData);
 
   

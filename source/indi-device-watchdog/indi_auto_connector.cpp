@@ -124,7 +124,7 @@ void IndiAutoConnectorT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
 
   if (indiDeviceDataIt != deviceConnections_.end()) {
     indiDeviceDataIt->second.setIndiBaseDevice(INDI::BaseDevice());
-    indiDeviceDataIt->second.setIndiConnectionProp(INDI::Property());
+    // indiDeviceDataIt->second.setIndiConnectionProp(INDI::Property());
   }
   else {
     std::cerr << "NOTE: Not handling INDI device '" << indiDeviceName << "' since it is not on the device list." << std::endl;
@@ -137,39 +137,39 @@ void IndiAutoConnectorT::propertyRemoved(INDI::Property property) {
     std::cerr << "propertyRemoved..." << std::endl;
 
     
-    INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
-    std::string indiDeviceName = indiBaseDevice.getDeviceName();
+    // INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
+    // std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
-    std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
+    // std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
 
-    DeviceConnStateMapT::iterator deviceDataIt = deviceConnections_.find(indiDeviceName);
+    // DeviceConnStateMapT::iterator deviceDataIt = deviceConnections_.find(indiDeviceName);
     
-    if (deviceDataIt != deviceConnections_.end()) {
-      // Put an empty property as connection property
-      deviceDataIt->second.setIndiConnectionProp(INDI::Property());
-    }
+    // if (deviceDataIt != deviceConnections_.end()) {
+    //   // Put an empty property as connection property
+    //   deviceDataIt->second.setIndiConnectionProp(INDI::Property());
+    // }
   }
 }
 
 
 void IndiAutoConnectorT::propertyUpdated(INDI::Property property) {
   
-  if (! std::strcmp(property.getName(), "CONNECTION")) {
+  // if (! std::strcmp(property.getName(), "CONNECTION")) {
 
-    INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
-    std::string indiDeviceName = indiBaseDevice.getDeviceName();
+  //   INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
+  //   std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
-    std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
+  //   std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
 
-    DeviceConnStateMapT::iterator deviceDataIt = deviceConnections_.find(indiDeviceName);
+  //   DeviceConnStateMapT::iterator deviceDataIt = deviceConnections_.find(indiDeviceName);
     
-    INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
+  //   INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
 
-    if (deviceDataIt != deviceConnections_.end()) {
-      // Update the connection property only
-      deviceDataIt->second.setIndiConnectionProp(connectionSwitch);
-    }
-  }  
+  //   if (deviceDataIt != deviceConnections_.end()) {
+  //     // Update the connection property only
+  //     deviceDataIt->second.setIndiConnectionProp(connectionSwitch);
+  //   }
+  // }  
 }
 
 
@@ -179,7 +179,16 @@ void IndiAutoConnectorT::requestIndiDriverRestart(DeviceDataT & deviceData) {
   indiDriverRestartManager_.requestRestart(driverName);
   
   deviceData.setIndiBaseDevice(INDI::BaseDevice());
-  deviceData.setIndiConnectionProp(INDI::Property());
+  //  deviceData.setIndiConnectionProp(INDI::Property());
+}
+
+
+bool IndiAutoConnectorT::isDeviceValid(INDI::BaseDevice indiBaseDevice) {
+#if INDI_MAJOR_VERSION < 2
+  return (indiBaseDevice.getDeviceName() != nullptr);
+#else
+  return indiBaseDevice.isValid();
+#endif
 }
 
 
@@ -192,46 +201,63 @@ bool IndiAutoConnectorT::sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseD
 
   std::cerr << "Sending INDI device connect request for device ' '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
 
-  if (! indiBaseDevice.isValid()) {
+  if (isDeviceValid(indiBaseDevice)) {
     return false;
   }
-  
+
+
+#if INDI_MAJOR_VERSION < 2
+
+    ISwitchVectorProperty* connectionSwitchVec = indiBaseDevice->getSwitch("CONNECTION");
+
+    // TODO: Check connectionSwitchVec for nullptr...
+    // TODO: Better get via propery name "CONNECT" / "DISCONNECT"? -> ISwitch * p = IUFindSwitch(vec, "CONNECT");
+    // TODO: Check switch state - IPS_ALERT / IPS_OK...?
+    // TODO: Check connectionSwitchVec->sp...
+    connectionSwitchVec->sp[0].s = ISS_ON;
+    connectionSwitchVec->sp[1].s = ISS_OFF;
+    
+    client_.sendNewSwitch(connectionSwitchVec);
+
+#else    
   INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
 
   if (! connectionSwitch.isValid()) {
     return false;
   }
-  
+
+  // TODO: Better get via propery name "CONNECT" / "DISCONNECT"? 
   connectionSwitch[0].setState(ISS_ON);
   connectionSwitch[1].setState(ISS_OFF);
     
   client_.sendNewSwitch(connectionSwitch);
+#endif
   
   return true;
 }
 
 
-bool IndiAutoConnectorT::sendIndiDeviceDisconnectRequest(INDI::BaseDevice indiBaseDevice) {
+// bool IndiAutoConnectorT::sendIndiDeviceDisconnectRequest(INDI::BaseDevice indiBaseDevice) {
 
-  if (! indiBaseDevice.isValid()) {
-    return false;
-  }
+//   if (! indiBaseDevice.isValid()) {
+//     return false;
+//   }
 
-  std::cerr << "Sending INDI device disconnect request for device '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
+//   std::cerr << "Sending INDI device disconnect request for device '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
   
-  INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
+//   INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
 
-  if (! connectionSwitch.isValid()) {
-    return false;
-  }
+//   if (! connectionSwitch.isValid()) {
+//     return false;
+//   }
 
-  connectionSwitch[0].setState(ISS_OFF);
-  connectionSwitch[1].setState(ISS_ON);
+//   connectionSwitch[0].setState(ISS_OFF);
+//   connectionSwitch[1].setState(ISS_ON);
     
-  client_.sendNewSwitch(connectionSwitch);
+//   client_.sendNewSwitch(connectionSwitch);
 
-  return true;
-}
+//   return true;
+// }
 
 
 bool IndiAutoConnectorT::fileExists(const std::string & pathToFile) const {
@@ -239,18 +265,24 @@ bool IndiAutoConnectorT::fileExists(const std::string & pathToFile) const {
 }
 
 
-bool IndiAutoConnectorT::isIndiDeviceConnected(INDI::PropertySwitch indiConnectionProp) const {
-  return (indiConnectionProp.isValid() ? (indiConnectionProp[0].getState() == ISS_ON ? true : false) : false);
+bool IndiAutoConnectorT::isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice) {
+
+#if INDI_MAJOR_VERSION < 2
+  ISwitchVectorProperty* connectionSwitchVec = indiBaseDevice.getSwitch("CONNECTION");
+  return (connectionSwitchVec != nullptr ? (connectionSwitchVec->sp != nullptr ? connectionSwitchVec->sp[0].s == ISS_ON : false) : false);  
+#else    
+  INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
+  return (connectionSwitch.isValid() ? (connectionSwitch[0].getState() == ISS_ON ? true : false) : false);
+#endif
 }
 
 
 void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
   std::string indiDeviceName = deviceData.getIndiDeviceName();
-  INDI::PropertySwitch indiConnectionProp = deviceData.getIndiConnectionProp();
 
+  bool indiDeviceConnected = isIndiDeviceConnected(deviceData.getIndiBaseDevice());
   bool linuxDeviceExists = fileExists(deviceData.getLinuxDeviceName());
   bool indiDeviceExists = deviceData.getIndiBaseDevice().isValid();
-  bool indiDeviceConnected = isIndiDeviceConnected(indiConnectionProp);
   
   std::cerr << "Processing '" << indiDeviceName << "' -> Linux device exists? " << linuxDeviceExists << ", INDI device exists? " << indiDeviceExists << ", INDI device connected? " << indiDeviceConnected << " (details: " << deviceData << ")" << std::endl;
 
@@ -280,33 +312,20 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
     // Linux device does not exist
     if (indiDeviceConnected) {
       // Disconnect INDI device
-      bool successful = sendIndiDeviceDisconnectRequest(deviceData.getIndiBaseDevice());
+      // TODO: Re-enable
+      //      bool successful = sendIndiDeviceDisconnectRequest(deviceData.getIndiBaseDevice());
 
       deviceData.setIndiBaseDevice(INDI::BaseDevice());
-      deviceData.setIndiConnectionProp(INDI::Property());
+      // deviceData.setIndiConnectionProp(INDI::Property());
       
-      if (! successful) {
-	// If disconnect fails, restart INDI driver
-	requestIndiDriverRestart(deviceData);
-      }
+      // TODO: Re-enable
+      // if (! successful) {
+      // 	// If disconnect fails, restart INDI driver
+      // 	requestIndiDriverRestart(deviceData);
+      // }
     }
   }
   
-}
-
-
-bool IndiAutoConnectorT::areAllIndiDevicesConnected() const {
-  bool allAreConnected = true;
-  
-  for (auto it = deviceConnections_.begin(); it != deviceConnections_.end(); ++it) {
-
-    const DeviceDataT & deviceData = it->second; 
-    INDI::PropertySwitch indiConnectionProp = deviceData.getIndiConnectionProp();
-    bool indiDeviceConnected = isIndiDeviceConnected(indiConnectionProp);
-    
-    allAreConnected &= indiDeviceConnected;
-  }
-  return allAreConnected;
 }
 
 
