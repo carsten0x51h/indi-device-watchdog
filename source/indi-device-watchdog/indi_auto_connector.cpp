@@ -282,7 +282,7 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
 
   bool indiDeviceConnected = isIndiDeviceConnected(deviceData.getIndiBaseDevice());
   bool linuxDeviceExists = fileExists(deviceData.getLinuxDeviceName());
-  bool indiDeviceExists = deviceData.getIndiBaseDevice().isValid();
+  bool indiDeviceExists = isDeviceValid(deviceData.getIndiBaseDevice());
   
   std::cerr << "Processing '" << indiDeviceName << "' -> Linux device exists? " << linuxDeviceExists << ", INDI device exists? " << indiDeviceExists << ", INDI device connected? " << indiDeviceConnected << " (details: " << deviceData << ")" << std::endl;
 
