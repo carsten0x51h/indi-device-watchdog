@@ -205,10 +205,12 @@ bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseD
 
 
 #if INDI_MAJOR_VERSION < 2
-
     ISwitchVectorProperty* connectionSwitchVec = indiBaseDevice.getSwitch("CONNECTION");
 
-    // TODO: Check connectionSwitchVec for nullptr...
+    if (connectionSwitchVec == nullptr) {
+      return false;
+    }
+    
     // TODO: Better get via propery name "CONNECT" / "DISCONNECT"? -> ISwitch * p = IUFindSwitch(vec, "CONNECT");
     // TODO: Check switch state - IPS_ALERT / IPS_OK...?
     // TODO: Check connectionSwitchVec->sp...
@@ -225,9 +227,9 @@ bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseD
   }
 
   // TODO: Better get via property name "CONNECT" / "DISCONNECT"? 
-  connectionSwitch[0].setState(ISS_ON);
-  connectionSwitch[1].setState(ISS_OFF);
-    
+  connectionSwitch[0].setState(connect ? ISS_ON : ISS_OFF);
+  connectionSwitch[1].setState(connect ? ISS_OFF : ISS_ON);
+
   client_.sendNewSwitch(connectionSwitch);
 #endif
   
