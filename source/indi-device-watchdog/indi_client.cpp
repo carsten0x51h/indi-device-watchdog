@@ -36,6 +36,79 @@ IndiClientT::IndiClientT() = default;
 
 IndiClientT::~IndiClientT() = default;
 
+
+#if INDI_MAJOR_VERSION < 2
+
+void IndiClientT::newDevice(INDI::BaseDevice* dp) {
+  notifyNewDevice(*dp);
+}
+
+void IndiClientT::removeDevice(INDI::BaseDevice* dp) {
+  notifyRemoveDevice(*dp);
+}
+
+void IndiClientT::newProperty(INDI::Property* property) {
+  notifyNewProperty(*property);
+}
+
+void IndiClientT::removeProperty(INDI::Property* property) {
+    notifyRemoveProperty(*property);
+}
+
+void IndiClientT::newSwitch(ISwitchVectorProperty* svp) {
+  std::string deviceName(svp->device);
+  std::string propertyName(svp->name);
+  INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
+  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_SWITCH);
+  
+  notifyUpdateProperty(property);
+}
+
+void IndiClientT::newNumber(INumberVectorProperty* nvp) {
+  std::string deviceName(nvp->device);
+  std::string propertyName(nvp->name);
+  INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
+  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_NUMBER);
+  
+  notifyUpdateProperty(property);
+}
+
+void IndiClientT::newText(ITextVectorProperty* tvp) {
+  std::string deviceName(tvp->device);
+  std::string propertyName(tvp->name);
+  INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
+  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_TEXT);
+  
+  notifyUpdateProperty(property);
+}
+
+void IndiClientT::newLight(ILightVectorProperty* lvp) {
+  std::string deviceName(lvp->device);
+  std::string propertyName(lvp->name);
+  INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
+  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_LIGHT);
+  
+  notifyUpdateProperty(property);
+}
+
+void IndiClientT::newBLOB(IBLOB* bp) {
+  IBLOBVectorProperty* blobPropVec = bp->bvp;
+  std::string deviceName(blobPropVec->device);
+  std::string propertyName(blobPropVec->name);
+  INDI::BaseDevice* baseDevicePtr = getDevice(deviceName.c_str());
+  INDI::Property property = baseDevicePtr->getProperty(propertyName.c_str(), INDI_BLOB);
+  
+  notifyUpdateProperty(property);
+}
+
+void IndiClientT::newMessage(INDI::BaseDevice * dp, int messageID) {
+  notifyNewMessage(*dp, messageID);
+}
+
+
+#else
+
+
 void IndiClientT::newDevice(INDI::BaseDevice dp) {
     notifyNewDevice(dp);
 }
@@ -56,11 +129,11 @@ void IndiClientT::removeProperty(INDI::Property property) {
     notifyRemoveProperty(property);
 }
 
-
 void IndiClientT::newMessage(INDI::BaseDevice dp, int messageID) {
-    std::string msgStr = dp.messageQueue(messageID);
     notifyNewMessage(dp, messageID);
 }
+
+#endif
 
 
 // TODO: We may have to change the connection logic - INDI client API blocks??!

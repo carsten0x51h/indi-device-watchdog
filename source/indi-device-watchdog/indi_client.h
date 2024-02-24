@@ -188,6 +188,23 @@ protected:
     void notifyServerConnectionFailed() { mServerConectionFailedListeners(); }
 
 
+  #if INDI_MAJOR_VERSION < 2
+    void newDevice(INDI::BaseDevice* dp) override;
+
+    void removeDevice(INDI::BaseDevice* dp) override;
+
+    void newProperty(INDI::Property* property) override;
+
+    void removeProperty(INDI::Property* property) override;
+
+    void newSwitch(ISwitchVectorProperty *svp) override;
+    void newNumber(INumberVectorProperty *nvp) override;
+    void newText(ITextVectorProperty *tvp) override;
+    void newLight(ILightVectorProperty *lvp) override;
+    void newBLOB(IBLOB *bp) override;
+  
+    void newMessage(INDI::BaseDevice * dp, int messageID) override;
+  #else
     /////////////////////////////////////////////////////////
     // Implement the base device methods
     /////////////////////////////////////////////////////////
@@ -202,6 +219,7 @@ protected:
     void removeProperty(INDI::Property property) override;
 
     void newMessage(INDI::BaseDevice dp, int messageID) override;
+  #endif
   
     void serverConnected() override;
 
