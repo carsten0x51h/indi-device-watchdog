@@ -67,7 +67,7 @@ class IndiAutoConnectorT {
 
 
   void requestIndiDriverRestart(DeviceDataT & deviceData);
-  bool sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseDevice);
+  bool requestConnectionStateChange(INDI::BaseDevice indiBaseDevice, bool connect);
   bool sendIndiDeviceDisconnectRequest(INDI::BaseDevice indiBaseDevice);
   bool fileExists(const std::string & pathToFile) const;
   static bool isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice);

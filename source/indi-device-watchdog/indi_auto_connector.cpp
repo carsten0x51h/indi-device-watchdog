@@ -47,7 +47,7 @@ IndiAutoConnectorT::IndiAutoConnectorT(const std::string & hostname, int port, c
   client_.setServer(hostname.c_str(), port);
   
   serverConnectionFailedListenerConnection_ = client_.registerServerConnectionFailedListener([&]() {
-    std::cerr << "Connection to INDI server failed. Exiting." << std::endl;
+    std::cerr << "Connection to INDI server failed." << std::endl;
     connected_ = false;
   });
 
@@ -124,7 +124,6 @@ void IndiAutoConnectorT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
 
   if (indiDeviceDataIt != deviceConnections_.end()) {
     indiDeviceDataIt->second.setIndiBaseDevice(INDI::BaseDevice());
-    // indiDeviceDataIt->second.setIndiConnectionProp(INDI::Property());
   }
   else {
     std::cerr << "NOTE: Not handling INDI device '" << indiDeviceName << "' since it is not on the device list." << std::endl;
@@ -179,7 +178,6 @@ void IndiAutoConnectorT::requestIndiDriverRestart(DeviceDataT & deviceData) {
   indiDriverRestartManager_.requestRestart(driverName);
   
   deviceData.setIndiBaseDevice(INDI::BaseDevice());
-  //  deviceData.setIndiConnectionProp(INDI::Property());
 }
 
 
@@ -197,7 +195,7 @@ bool IndiAutoConnectorT::isDeviceValid(INDI::BaseDevice indiBaseDevice) {
  *      --> Actually an updated from the INDI server will be sent once the property has
  *          changed successfully. Only then the connect was successful.
  */
-bool IndiAutoConnectorT::sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseDevice) {
+bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseDevice, bool connect) {
 
   std::cerr << "Sending INDI device connect request for device ' '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
 
@@ -214,8 +212,8 @@ bool IndiAutoConnectorT::sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseD
     // TODO: Better get via propery name "CONNECT" / "DISCONNECT"? -> ISwitch * p = IUFindSwitch(vec, "CONNECT");
     // TODO: Check switch state - IPS_ALERT / IPS_OK...?
     // TODO: Check connectionSwitchVec->sp...
-    connectionSwitchVec->sp[0].s = ISS_ON;
-    connectionSwitchVec->sp[1].s = ISS_OFF;
+    connectionSwitchVec->sp[0].s = (connect ? ISS_ON : ISS_OFF);
+    connectionSwitchVec->sp[1].s = (connect ? ISS_OFF : ISS_ON);
     
     client_.sendNewSwitch(connectionSwitchVec);
 
@@ -226,7 +224,7 @@ bool IndiAutoConnectorT::sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseD
     return false;
   }
 
-  // TODO: Better get via propery name "CONNECT" / "DISCONNECT"? 
+  // TODO: Better get via property name "CONNECT" / "DISCONNECT"? 
   connectionSwitch[0].setState(ISS_ON);
   connectionSwitch[1].setState(ISS_OFF);
     
@@ -235,29 +233,6 @@ bool IndiAutoConnectorT::sendIndiDeviceConnectRequest(INDI::BaseDevice indiBaseD
   
   return true;
 }
-
-
-// bool IndiAutoConnectorT::sendIndiDeviceDisconnectRequest(INDI::BaseDevice indiBaseDevice) {
-
-//   if (! indiBaseDevice.isValid()) {
-//     return false;
-//   }
-
-//   std::cerr << "Sending INDI device disconnect request for device '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
-  
-//   INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
-
-//   if (! connectionSwitch.isValid()) {
-//     return false;
-//   }
-
-//   connectionSwitch[0].setState(ISS_OFF);
-//   connectionSwitch[1].setState(ISS_ON);
-    
-//   client_.sendNewSwitch(connectionSwitch);
-
-//   return true;
-// }
 
 
 bool IndiAutoConnectorT::fileExists(const std::string & pathToFile) const {
@@ -299,7 +274,7 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
       // and INDI device is not connected
       if (! indiDeviceConnected && deviceData.getEnableAutoConnect()) {
 	// Try to connect INDI device
-	bool successful = sendIndiDeviceConnectRequest(deviceData.getIndiBaseDevice());
+	bool successful = requestConnectionStateChange(deviceData.getIndiBaseDevice(), true);
 
 	if (! successful) {
 	  // If connection fails, restart INDI driver
@@ -312,17 +287,14 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
     // Linux device does not exist
     if (indiDeviceConnected) {
       // Disconnect INDI device
-      // TODO: Re-enable
-      //      bool successful = sendIndiDeviceDisconnectRequest(deviceData.getIndiBaseDevice());
+      bool successful = requestConnectionStateChange(deviceData.getIndiBaseDevice(), false);
 
       deviceData.setIndiBaseDevice(INDI::BaseDevice());
-      // deviceData.setIndiConnectionProp(INDI::Property());
       
-      // TODO: Re-enable
-      // if (! successful) {
-      // 	// If disconnect fails, restart INDI driver
-      // 	requestIndiDriverRestart(deviceData);
-      // }
+      if (! successful) {
+	// If disconnect fails, restart INDI driver
+	requestIndiDriverRestart(deviceData);
+      }
     }
   }
   
