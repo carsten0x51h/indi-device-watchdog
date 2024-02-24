@@ -113,6 +113,7 @@ void IndiAutoConnectorT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
 }
 
 
+
 void IndiAutoConnectorT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
   std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
@@ -199,7 +200,7 @@ bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseD
 
   std::cerr << "Sending INDI device connect request for device ' '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
 
-  if (isDeviceValid(indiBaseDevice)) {
+  if (! isDeviceValid(indiBaseDevice)) {
     return false;
   }
 
