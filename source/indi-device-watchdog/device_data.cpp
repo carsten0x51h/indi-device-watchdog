@@ -81,10 +81,13 @@ void DeviceDataT::setEnableAutoConnect(bool enableAutoConnect) {
 std::ostream &
 DeviceDataT::print(std::ostream &os) const {
 
+  // NOTE: In older INDI versions getDeviceName() does not have a const qualifier.
+  const char * indiDeviceName = const_cast<DeviceDataT*>(this)->indiBaseDevice_.getDeviceName();
+  
   os << "Device name: " << indiDeviceName_
      << ", linux device: " << linuxDeviceName_
      << ", INDI driver: " << indiDeviceDriverName_
-     << ", INDI device: " << (indiBaseDevice_.getDeviceName() != nullptr ? indiBaseDevice_.getDeviceName() : "NOT SET");
+     << ", INDI device: " << (indiDeviceName != nullptr ? indiDeviceName : "NOT SET");
 
   return os;
 }
