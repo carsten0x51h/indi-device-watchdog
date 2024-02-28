@@ -34,7 +34,9 @@
 
 IndiClientT::IndiClientT() = default;
 
-IndiClientT::~IndiClientT() = default;
+IndiClientT::~IndiClientT() {
+  disconnect();
+}
 
 
 #if INDI_MAJOR_VERSION < 2
@@ -171,10 +173,11 @@ void IndiClientT::connect() {
 }
 
 void IndiClientT::disconnect() {
-    notifyServerConnectionStateChanged(IndiServerConnectionStateT::DISCONNECTING);
 
     if (this->isServerConnected()) {
-        this->disconnectServer();
+      notifyServerConnectionStateChanged(IndiServerConnectionStateT::DISCONNECTING);
+      
+      this->disconnectServer();
     }
 
 }

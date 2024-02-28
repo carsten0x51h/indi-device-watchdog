@@ -30,6 +30,7 @@
 
 #include <boost/signals2.hpp>
 #include <map>
+#include <memory>
 #include <mutex>
 
 #include "indi_client.h"
@@ -41,7 +42,9 @@
  */
 class IndiAutoConnectorT {
  private:
-  IndiClientT client_;
+  std::string hostname_;
+  int port_;
+  std::shared_ptr<IndiClientT> client_;
   bool connected_;
   boost::signals2::connection serverConnectionFailedListenerConnection_;
   boost::signals2::connection newDeviceListenerConnection_;
@@ -49,6 +52,7 @@ class IndiAutoConnectorT {
   boost::signals2::connection newPropertyListenerConnection_;
   boost::signals2::connection removePropertyListenerConnection_;
   boost::signals2::connection updatePropertyListenerConnection_;
+  //  boost::signals2::connection serverConnectionStateChangedConnection_;
 
   typedef std::map<std::string /*device name*/, DeviceDataT> DeviceConnStateMapT;
   DeviceConnStateMapT deviceConnections_; 
@@ -59,6 +63,7 @@ class IndiAutoConnectorT {
 
   static bool isDeviceValid(INDI::BaseDevice indiBaseDevice);
   static INDI::BaseDevice getBaseDeviceFromProperty(INDI::Property property);
+  void resetIndiClient();
   
   void addIndiDevice(INDI::BaseDevice device);
   void removeIndiDevice(INDI::BaseDevice device);
@@ -66,12 +71,12 @@ class IndiAutoConnectorT {
   void propertyRemoved(INDI::Property property);
 
 
-  void requestIndiDriverRestart(DeviceDataT & deviceData);
+  bool requestIndiDriverRestart(DeviceDataT & deviceData);
   bool requestConnectionStateChange(INDI::BaseDevice indiBaseDevice, bool connect);
   bool sendIndiDeviceDisconnectRequest(INDI::BaseDevice indiBaseDevice);
   bool fileExists(const std::string & pathToFile) const;
   static bool isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice);
-  void handleDeviceConnection(DeviceDataT & deviceData);
+  bool handleDeviceConnection(DeviceDataT & deviceData);
 
   
  public:

@@ -36,54 +36,85 @@
 
 #include "indi_auto_connector.h"
 
-IndiAutoConnectorT::IndiAutoConnectorT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor) {
+IndiAutoConnectorT::IndiAutoConnectorT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor) : hostname_(hostname), port_(port) {
   using namespace std::chrono_literals;
 
+  resetIndiClient();
+  
   // Process config entries to deviceConnections_
   for (auto it = devicesToMonitor.begin(); it != devicesToMonitor.end(); ++it) {
     deviceConnections_.insert( std::pair<std::string, DeviceDataT>(it->getIndiDeviceName(), *it) );
   }
 
-  client_.setServer(hostname.c_str(), port);
-  
-  serverConnectionFailedListenerConnection_ = client_.registerServerConnectionFailedListener([&]() {
-    std::cerr << "Connection to INDI server failed." << std::endl;
-    connected_ = false;
-  });
-
-  newDeviceListenerConnection_ = client_.registerNewDeviceListener([&](INDI::BaseDevice device) {
-    addIndiDevice(device);
-  });
-
-  removeDeviceListenerConnection_ = client_.registerRemoveDeviceListener([&](INDI::BaseDevice device) {
-    removeIndiDevice(device);
-  });
-
-  newPropertyListenerConnection_ = client_.registerNewPropertyListener([&](INDI::Property property) {
-    propertyUpdated(property);
-  });
-
-  removePropertyListenerConnection_ = client_.registerRemovePropertyListener([&](INDI::Property property) {
-    propertyRemoved(property);
-  });
-  
-  updatePropertyListenerConnection_ = client_.registerUpdatePropertyListener([&](INDI::Property property) {
-    propertyUpdated(property);
-  });
 }
 
 IndiAutoConnectorT::~IndiAutoConnectorT() {
 
   serverConnectionFailedListenerConnection_.disconnect();
+  //serverConnectionStateChangedConnection_.disconnect();
   newDeviceListenerConnection_.disconnect();
   removeDeviceListenerConnection_.disconnect();
   newPropertyListenerConnection_.disconnect();
   removePropertyListenerConnection_.disconnect();
   updatePropertyListenerConnection_.disconnect();
   
-  client_.disconnect();
+  client_->disconnect();
 }
 
+
+void IndiAutoConnectorT::resetIndiClient() {
+
+  serverConnectionFailedListenerConnection_.disconnect();
+  //serverConnectionStateChangedConnection_.disconnect();
+  newDeviceListenerConnection_.disconnect();
+  removeDeviceListenerConnection_.disconnect();
+  newPropertyListenerConnection_.disconnect();
+  removePropertyListenerConnection_.disconnect();
+  updatePropertyListenerConnection_.disconnect();
+
+  if (client_ != nullptr) {
+    client_->disconnect();
+  }
+
+  std::cerr << "Resetting INDI client..." << std::endl;
+
+  connected_ = false;
+  
+  client_ = std::make_shared<IndiClientT>(); // Create a new client
+  
+  client_->setServer(hostname_.c_str(), port_);
+  
+  serverConnectionFailedListenerConnection_ = client_->registerServerConnectionFailedListener([&]() {
+    std::cerr << "Connection to INDI server failed." << std::endl;
+    connected_ = false;
+  });
+
+  // serverConnectionStateChangedConnection_ = client_->registerServerConnectionStateChangedListener([&](IndiServerConnectionStateT::TypeE indiServerConnectionState) {
+  //   std::cout << "Connection to INDI changed to " << IndiServerConnectionStateT::asStr(indiServerConnectionState) << std::endl;
+    
+  //   connected_ = (indiServerConnectionState == IndiServerConnectionStateT::CONNECTED);
+  // });
+    
+  newDeviceListenerConnection_ = client_->registerNewDeviceListener([&](INDI::BaseDevice device) {
+    addIndiDevice(device);
+  });
+
+  removeDeviceListenerConnection_ = client_->registerRemoveDeviceListener([&](INDI::BaseDevice device) {
+    removeIndiDevice(device);
+  });
+
+  newPropertyListenerConnection_ = client_->registerNewPropertyListener([&](INDI::Property property) {
+    propertyUpdated(property);
+  });
+
+  removePropertyListenerConnection_ = client_->registerRemovePropertyListener([&](INDI::Property property) {
+    propertyRemoved(property);
+  });
+  
+  updatePropertyListenerConnection_ = client_->registerUpdatePropertyListener([&](INDI::Property property) {
+    propertyUpdated(property);
+  });
+}
 
 INDI::BaseDevice IndiAutoConnectorT::getBaseDeviceFromProperty(INDI::Property property) {
 #if INDI_MAJOR_VERSION < 2
@@ -173,12 +204,14 @@ void IndiAutoConnectorT::propertyUpdated(INDI::Property /*property*/) {
 }
 
 
-void IndiAutoConnectorT::requestIndiDriverRestart(DeviceDataT & deviceData) {
+bool IndiAutoConnectorT::requestIndiDriverRestart(DeviceDataT & deviceData) {
   std::string driverName = deviceData.getIndiDeviceDriverName();
   
-  indiDriverRestartManager_.requestRestart(driverName);
+  bool restarted = indiDriverRestartManager_.requestRestart(driverName);
   
   deviceData.setIndiBaseDevice(INDI::BaseDevice());
+
+  return restarted;
 }
 
 
@@ -198,7 +231,7 @@ bool IndiAutoConnectorT::isDeviceValid(INDI::BaseDevice indiBaseDevice) {
  */
 bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseDevice, bool connect) {
 
-  std::cerr << "Sending INDI device connect request for device ' '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
+  std::cerr << "Sending INDI device " << (connect ? "connect" : " disconnect") << " request for device ' '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
 
   if (! isDeviceValid(indiBaseDevice)) {
     return false;
@@ -218,7 +251,7 @@ bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseD
     connectionSwitchVec->sp[0].s = (connect ? ISS_ON : ISS_OFF);
     connectionSwitchVec->sp[1].s = (connect ? ISS_OFF : ISS_ON);
     
-    client_.sendNewSwitch(connectionSwitchVec);
+    client_->sendNewSwitch(connectionSwitchVec);
 
 #else    
   INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
@@ -231,7 +264,7 @@ bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseD
   connectionSwitch[0].setState(connect ? ISS_ON : ISS_OFF);
   connectionSwitch[1].setState(connect ? ISS_OFF : ISS_ON);
 
-  client_.sendNewSwitch(connectionSwitch);
+  client_->sendNewSwitch(connectionSwitch);
 #endif
   
   return true;
@@ -255,7 +288,7 @@ bool IndiAutoConnectorT::isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice) 
 }
 
 
-void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
+bool IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
   std::string indiDeviceName = deviceData.getIndiDeviceName();
 
   bool indiDeviceConnected = isIndiDeviceConnected(deviceData.getIndiBaseDevice());
@@ -269,7 +302,7 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
     if (! indiDeviceExists) {
       // Linux device is there but corresponding INDI base
       // device does not exist -> Restart INDI driver
-      requestIndiDriverRestart(deviceData);
+      return requestIndiDriverRestart(deviceData);
     }
     else {
       // Linux device is there and corresponding INDI base
@@ -281,7 +314,7 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
 
 	if (! successful) {
 	  // If connection fails, restart INDI driver
-	  requestIndiDriverRestart(deviceData);
+	  return requestIndiDriverRestart(deviceData);
 	}
       }
     }
@@ -296,11 +329,12 @@ void IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
       
       if (! successful) {
 	// If disconnect fails, restart INDI driver
-	requestIndiDriverRestart(deviceData);
+	return requestIndiDriverRestart(deviceData);
       }
     }
   }
-  
+
+  return false;
 }
 
 
@@ -313,10 +347,10 @@ void IndiAutoConnectorT::run() {
     std::cerr << "Trying to connect to INDI server...";
 
     // Try to (re-) connect to the INDI server
-    client_.connect();
+    client_->connect();
 
     auto isClientConnected = [&]() -> bool {
-      return client_.isConnected();
+      return client_->isConnected();
     };
   
     try {
@@ -334,9 +368,31 @@ void IndiAutoConnectorT::run() {
       std::this_thread::sleep_for(std::chrono::milliseconds(5000ms));
 
       std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
-
+      
       for (auto it = deviceConnections_.begin(); it != deviceConnections_.end(); ++it) {
-	handleDeviceConnection(it->second);
+	bool restarted = handleDeviceConnection(it->second);
+
+	if (restarted) {
+
+	  resetIndiClient();
+	  // std::this_thread::sleep_for(std::chrono::milliseconds(3000ms));
+
+	  // client_->disconnect();
+
+	  // auto isClientDisconnected = [&]() -> bool {
+	  //   return !client_->isConnected();
+	  // };
+  
+	  // try {
+	  //   wait_for(isClientDisconnected, 5000ms);
+	  //   connected_ = false;
+	  // } catch (std::runtime_error & exc) {
+	  //   std::cerr << "Timeout! Assuming disconnected." << std::endl;
+	  //   connected_ = false;
+	  // }
+	  
+	  break;
+	}
       }
       
       std::cerr << std::endl << std::endl;

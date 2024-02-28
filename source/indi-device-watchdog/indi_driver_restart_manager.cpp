@@ -57,9 +57,6 @@ void IndiDriverRestartManagerT::restart(const std::string & indiDriverName) {
     indiServerPipe << "stop " << indiDriverPath.string() << std::endl;
     indiServerPipe << "start " << indiDriverPath.string() << std::endl;
 
-    // TODO: Remove... / Check?
-    std::cerr << "RDSTATE: " << indiServerPipe.rdstate() << std::endl;
-    
     indiServerPipe.close();
   }
   else {
@@ -68,8 +65,9 @@ void IndiDriverRestartManagerT::restart(const std::string & indiDriverName) {
 }
 
 
-void IndiDriverRestartManagerT::requestRestart(const std::string & indiDriverName) {
+bool IndiDriverRestartManagerT::requestRestart(const std::string & indiDriverName) {
   auto it = driverRestartMap_.find(indiDriverName);
+  bool restarted = false;
 
   if (it != driverRestartMap_.end()) {
     // Already known..
@@ -77,6 +75,7 @@ void IndiDriverRestartManagerT::requestRestart(const std::string & indiDriverNam
     
     if (isRestartConditionReached) {
       restart(indiDriverName);
+      restarted = true;
 
       // Reset the counter
       it->second = 0;
@@ -89,10 +88,12 @@ void IndiDriverRestartManagerT::requestRestart(const std::string & indiDriverNam
     // New entry
     // First request -> directly restart
     restart(indiDriverName);
+    restarted = true;
     
     driverRestartMap_.insert(std::pair<std::string, int> (indiDriverName, 0));
   }
-  
+
+  return restarted;
 }
 
 

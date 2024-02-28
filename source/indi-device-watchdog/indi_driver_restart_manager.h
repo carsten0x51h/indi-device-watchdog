@@ -41,7 +41,7 @@ class IndiDriverRestartManagerT {
   IndiDriverRestartManagerT();
   IndiDriverRestartManagerT(int restartTriggerLimit);
   
-  void requestRestart(const std::string & indiDriverName);
+  bool requestRestart(const std::string & indiDriverName);
   void requestImmediateRestart(const std::string & indiDriverName);
   void reset();
 };
