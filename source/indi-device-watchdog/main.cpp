@@ -31,7 +31,7 @@
 #include <boost/program_options.hpp>
 
 #include "indi_device_watchdog/indi_device_watchdog-version.h"
-#include "indi_auto_connector.h"
+#include "indi_device_watchdog.h"
 #include "device_data_persistance.h"
 
 std::string composeStartupMessage() {
@@ -85,9 +85,9 @@ int main(int argc, char *argv[]) {
   std::string indiHostname = vm["hostname"].as<std::string>();
   int indiPort = vm["port"].as<int>();
   
-  IndiAutoConnectorT indiAutoConnector(indiHostname, indiPort, devicesToMonitor);
+  IndiDeviceWatchdogT indiDeviceWatchdog(indiHostname, indiPort, devicesToMonitor);
 
-  indiAutoConnector.run();
+  indiDeviceWatchdog.run();
     
   return 0;
 }

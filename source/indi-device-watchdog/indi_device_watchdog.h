@@ -40,7 +40,7 @@
 /**
  * TODO: Idea: Rename to IndiDeviceWatchdogT
  */
-class IndiAutoConnectorT {
+class IndiDeviceWatchdogT {
  private:
   std::string hostname_;
   int port_;
@@ -80,8 +80,8 @@ class IndiAutoConnectorT {
 
   
  public:
-  IndiAutoConnectorT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor);
-  ~IndiAutoConnectorT();
+  IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor);
+  ~IndiDeviceWatchdogT();
   
   void run();
 };

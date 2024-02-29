@@ -24,8 +24,8 @@ set(sources
 	indi_driver_restart_manager.cpp
 	indi_client.cpp
 	indi_client.h
-	indi_auto_connector.cpp
-	indi_auto_connector.h
+	indi_device_watchdog.cpp
+	indi_device_watchdog.h
 	main.cpp
 )
 

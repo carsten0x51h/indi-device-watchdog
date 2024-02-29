@@ -34,9 +34,9 @@
 
 #include "wait_for.h"
 
-#include "indi_auto_connector.h"
+#include "indi_device_watchdog.h"
 
-IndiAutoConnectorT::IndiAutoConnectorT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor) : hostname_(hostname), port_(port) {
+IndiDeviceWatchdogT::IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor) : hostname_(hostname), port_(port) {
   using namespace std::chrono_literals;
 
   resetIndiClient();
@@ -48,7 +48,7 @@ IndiAutoConnectorT::IndiAutoConnectorT(const std::string & hostname, int port, c
 
 }
 
-IndiAutoConnectorT::~IndiAutoConnectorT() {
+IndiDeviceWatchdogT::~IndiDeviceWatchdogT() {
 
   serverConnectionFailedListenerConnection_.disconnect();
   //serverConnectionStateChangedConnection_.disconnect();
@@ -62,7 +62,7 @@ IndiAutoConnectorT::~IndiAutoConnectorT() {
 }
 
 
-void IndiAutoConnectorT::resetIndiClient() {
+void IndiDeviceWatchdogT::resetIndiClient() {
 
   serverConnectionFailedListenerConnection_.disconnect();
   //serverConnectionStateChangedConnection_.disconnect();
@@ -116,7 +116,7 @@ void IndiAutoConnectorT::resetIndiClient() {
   });
 }
 
-INDI::BaseDevice IndiAutoConnectorT::getBaseDeviceFromProperty(INDI::Property property) {
+INDI::BaseDevice IndiDeviceWatchdogT::getBaseDeviceFromProperty(INDI::Property property) {
 #if INDI_MAJOR_VERSION < 2
   return *property.getBaseDevice();
 #else
@@ -125,7 +125,7 @@ INDI::BaseDevice IndiAutoConnectorT::getBaseDeviceFromProperty(INDI::Property pr
 }
 
 
-void IndiAutoConnectorT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
+void IndiDeviceWatchdogT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
   std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
   std::cerr << "addIndiDevice: " << indiDeviceName << std::endl;
@@ -145,7 +145,7 @@ void IndiAutoConnectorT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
 
 
 
-void IndiAutoConnectorT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
+void IndiDeviceWatchdogT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
   std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
   std::cerr << "removeIndiDevice: " << indiDeviceName << std::endl;
@@ -162,7 +162,7 @@ void IndiAutoConnectorT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
   }
 }
 
-void IndiAutoConnectorT::propertyRemoved(INDI::Property property) {
+void IndiDeviceWatchdogT::propertyRemoved(INDI::Property property) {
 
   if (! std::strcmp(property.getName(), "CONNECTION")) {
     std::cerr << "propertyRemoved..." << std::endl;
@@ -183,7 +183,7 @@ void IndiAutoConnectorT::propertyRemoved(INDI::Property property) {
 }
 
 
-void IndiAutoConnectorT::propertyUpdated(INDI::Property /*property*/) {
+void IndiDeviceWatchdogT::propertyUpdated(INDI::Property /*property*/) {
   
   // if (! std::strcmp(property.getName(), "CONNECTION")) {
 
@@ -204,7 +204,7 @@ void IndiAutoConnectorT::propertyUpdated(INDI::Property /*property*/) {
 }
 
 
-bool IndiAutoConnectorT::requestIndiDriverRestart(DeviceDataT & deviceData) {
+bool IndiDeviceWatchdogT::requestIndiDriverRestart(DeviceDataT & deviceData) {
   std::string driverName = deviceData.getIndiDeviceDriverName();
   
   bool restarted = indiDriverRestartManager_.requestRestart(driverName);
@@ -215,7 +215,7 @@ bool IndiAutoConnectorT::requestIndiDriverRestart(DeviceDataT & deviceData) {
 }
 
 
-bool IndiAutoConnectorT::isDeviceValid(INDI::BaseDevice indiBaseDevice) {
+bool IndiDeviceWatchdogT::isDeviceValid(INDI::BaseDevice indiBaseDevice) {
 #if INDI_MAJOR_VERSION < 2
   return (indiBaseDevice.getDeviceName() != nullptr);
 #else
@@ -229,7 +229,7 @@ bool IndiAutoConnectorT::isDeviceValid(INDI::BaseDevice indiBaseDevice) {
  *      --> Actually an updated from the INDI server will be sent once the property has
  *          changed successfully. Only then the connect was successful.
  */
-bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseDevice, bool connect) {
+bool IndiDeviceWatchdogT::requestConnectionStateChange(INDI::BaseDevice indiBaseDevice, bool connect) {
 
   std::cerr << "Sending INDI device " << (connect ? "connect" : " disconnect") << " request for device ' '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
 
@@ -271,12 +271,12 @@ bool IndiAutoConnectorT::requestConnectionStateChange(INDI::BaseDevice indiBaseD
 }
 
 
-bool IndiAutoConnectorT::fileExists(const std::string & pathToFile) const {
+bool IndiDeviceWatchdogT::fileExists(const std::string & pathToFile) const {
   return std::filesystem::exists(pathToFile);
 }
 
 
-bool IndiAutoConnectorT::isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice) {
+bool IndiDeviceWatchdogT::isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice) {
 
 #if INDI_MAJOR_VERSION < 2
   ISwitchVectorProperty* connectionSwitchVec = indiBaseDevice.getSwitch("CONNECTION");
@@ -288,7 +288,7 @@ bool IndiAutoConnectorT::isIndiDeviceConnected(INDI::BaseDevice indiBaseDevice) 
 }
 
 
-bool IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
+bool IndiDeviceWatchdogT::handleDeviceConnection(DeviceDataT & deviceData) {
   std::string indiDeviceName = deviceData.getIndiDeviceName();
 
   bool indiDeviceConnected = isIndiDeviceConnected(deviceData.getIndiBaseDevice());
@@ -338,7 +338,7 @@ bool IndiAutoConnectorT::handleDeviceConnection(DeviceDataT & deviceData) {
 }
 
 
-void IndiAutoConnectorT::run() {
+void IndiDeviceWatchdogT::run() {
   using namespace std::chrono_literals;
 
 
