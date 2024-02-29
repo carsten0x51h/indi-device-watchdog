@@ -33,6 +33,7 @@
 #include "indi_device_watchdog/indi_device_watchdog-version.h"
 #include "indi_device_watchdog.h"
 #include "device_data_persistance.h"
+#include "logging.h"
 
 std::string composeStartupMessage() {
   std::stringstream ss;
@@ -48,9 +49,7 @@ std::string composeStartupMessage() {
 int main(int argc, char *argv[]) {
 
   using namespace boost::program_options;
-  namespace fs = std::filesystem;
-
-  std::cout << composeStartupMessage() << std::endl;
+  namespace fs = std::filesystem;  
   
   // Declare the supported options.
   options_description options("Astrobox control options");
@@ -76,6 +75,14 @@ int main(int argc, char *argv[]) {
   }
   
 
+  // TODO: Pass in log-level via cmdline
+  logging::trivial::severity_level sev = logging::trivial::debug;
+  LoggingT::init(sev, true /*console*/, true /*log file*/);
+
+
+  LOG(info) << composeStartupMessage() << std::endl;
+  
+  
   fs::path currentPath = fs::current_path();
   fs::path configFilename = vm["config"].as<std::string>();
   fs::path fullPath = currentPath / configFilename;

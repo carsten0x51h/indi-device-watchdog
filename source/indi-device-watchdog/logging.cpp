@@ -22,7 +22,7 @@
  *
  ****************************************************************************/
 
-#include "include/logging.h"
+#include "logging.h"
 
 void LoggingT::init(const logging::trivial::severity_level &inLogSev, bool inWantConsoleLog, bool inWantLogFile) {
     if (inWantConsoleLog) {
@@ -36,12 +36,12 @@ void LoggingT::init(const logging::trivial::severity_level &inLogSev, bool inWan
     if (inWantLogFile) {
         logging::add_file_log
                 (
-                        keywords::file_name = "sample_%N.log",  // file name pattern
+                        keywords::file_name = "indi_device_watchdog_%N.log",  // file name pattern
                         keywords::rotation_size =
                                 10 * 1024 * 1024,                    // rotate files every 10 MiB...
                         keywords::time_based_rotation = sinks::file::rotation_at_time_point(0, 0,
                                                                                             0), // ...or at midnight
-                        keywords::format = "[%TimeStamp%]: %Message%",                            // log record format
+                        keywords::format = "[%TimeStamp%]: %Message%",                          // log record format
                         keywords::auto_flush = true
                 );
     }

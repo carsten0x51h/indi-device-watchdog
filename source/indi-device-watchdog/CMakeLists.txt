@@ -18,6 +18,8 @@ set(sources
 	enum_helper.h
 	device_data.h
 	device_data.cpp
+	logging.h
+	logging.cpp
 	device_data_persistance.h	
 	device_data_persistance.cpp
 	indi_driver_restart_manager.h

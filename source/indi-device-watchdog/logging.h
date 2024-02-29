@@ -25,8 +25,8 @@
  *
  ****************************************************************************/
 
-#ifndef SOURCE_FOCUS_FINDER_COMMON_INCLUDE_LOGGING_H_
-#define SOURCE_FOCUS_FINDER_COMMON_INCLUDE_LOGGING_H_
+#ifndef SOURCE_INDI_DEVICE_WATCHDOG_INCLUDE_LOGGING_H_
+#define SOURCE_INDI_DEVICE_WATCHDOG_INCLUDE_LOGGING_H_ SOURCE_INDI_DEVICE_WATCHDOG_INCLUDE_LOGGING_H_
 
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
@@ -73,4 +73,4 @@ public:
 };
 
 
-#endif /* SOURCE_FOCUS_FINDER_COMMON_INCLUDE_LOGGING_H_ */
+#endif /* SOURCE_INDI_DEVICE_WATCHDOG_INCLUDE_LOGGING_H_ */
