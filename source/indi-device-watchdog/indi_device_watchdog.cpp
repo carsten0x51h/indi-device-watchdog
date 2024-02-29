@@ -32,6 +32,7 @@
 #include <vector>
 #include <filesystem>
 
+#include "logging.h"
 #include "wait_for.h"
 
 #include "indi_device_watchdog.h"
@@ -51,7 +52,6 @@ IndiDeviceWatchdogT::IndiDeviceWatchdogT(const std::string & hostname, int port,
 IndiDeviceWatchdogT::~IndiDeviceWatchdogT() {
 
   serverConnectionFailedListenerConnection_.disconnect();
-  //serverConnectionStateChangedConnection_.disconnect();
   newDeviceListenerConnection_.disconnect();
   removeDeviceListenerConnection_.disconnect();
   newPropertyListenerConnection_.disconnect();
@@ -65,7 +65,6 @@ IndiDeviceWatchdogT::~IndiDeviceWatchdogT() {
 void IndiDeviceWatchdogT::resetIndiClient() {
 
   serverConnectionFailedListenerConnection_.disconnect();
-  //serverConnectionStateChangedConnection_.disconnect();
   newDeviceListenerConnection_.disconnect();
   removeDeviceListenerConnection_.disconnect();
   newPropertyListenerConnection_.disconnect();
@@ -76,7 +75,7 @@ void IndiDeviceWatchdogT::resetIndiClient() {
     client_->disconnect();
   }
 
-  std::cerr << "Resetting INDI client..." << std::endl;
+  LOG(debug) <<"Resetting INDI client..." << std::endl;
 
   connected_ = false;
   
@@ -85,16 +84,10 @@ void IndiDeviceWatchdogT::resetIndiClient() {
   client_->setServer(hostname_.c_str(), port_);
   
   serverConnectionFailedListenerConnection_ = client_->registerServerConnectionFailedListener([&]() {
-    std::cerr << "Connection to INDI server failed." << std::endl;
+    LOG(error) << "Connection to INDI server failed." << std::endl;
     connected_ = false;
   });
 
-  // serverConnectionStateChangedConnection_ = client_->registerServerConnectionStateChangedListener([&](IndiServerConnectionStateT::TypeE indiServerConnectionState) {
-  //   std::cout << "Connection to INDI changed to " << IndiServerConnectionStateT::asStr(indiServerConnectionState) << std::endl;
-    
-  //   connected_ = (indiServerConnectionState == IndiServerConnectionStateT::CONNECTED);
-  // });
-    
   newDeviceListenerConnection_ = client_->registerNewDeviceListener([&](INDI::BaseDevice device) {
     addIndiDevice(device);
   });
@@ -128,7 +121,7 @@ INDI::BaseDevice IndiDeviceWatchdogT::getBaseDeviceFromProperty(INDI::Property p
 void IndiDeviceWatchdogT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
   std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
-  std::cerr << "addIndiDevice: " << indiDeviceName << std::endl;
+  LOG(debug) << "Adding INDI device '" << indiDeviceName << "'." << std::endl;
 
   std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
 
@@ -139,7 +132,7 @@ void IndiDeviceWatchdogT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
     indiDeviceDataIt->second.setIndiBaseDevice(indiBaseDevice);
   }
   else {
-    std::cerr << "NOTE: Not handling INDI device '" << indiDeviceName << "' since it is not on the device list." << std::endl;
+    LOG(error) << "NOTE: Not handling INDI device '" << indiDeviceName << "' since it is not on the device list." << std::endl;
   }
 }
 
@@ -148,7 +141,7 @@ void IndiDeviceWatchdogT::addIndiDevice(INDI::BaseDevice indiBaseDevice) {
 void IndiDeviceWatchdogT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
   std::string indiDeviceName = indiBaseDevice.getDeviceName();
 
-  std::cerr << "removeIndiDevice: " << indiDeviceName << std::endl;
+  LOG(debug) << "Removed INDI device '" << indiDeviceName << "'." << std::endl;
   
   std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
 
@@ -158,49 +151,18 @@ void IndiDeviceWatchdogT::removeIndiDevice(INDI::BaseDevice indiBaseDevice) {
     indiDeviceDataIt->second.setIndiBaseDevice(INDI::BaseDevice());
   }
   else {
-    std::cerr << "NOTE: Not handling INDI device '" << indiDeviceName << "' since it is not on the device list." << std::endl;
+    LOG(info) << "NOTE: Not handling INDI device '" << indiDeviceName << "' since it is not on the device list." << std::endl;
   }
 }
+
 
 void IndiDeviceWatchdogT::propertyRemoved(INDI::Property property) {
-
-  if (! std::strcmp(property.getName(), "CONNECTION")) {
-    std::cerr << "propertyRemoved..." << std::endl;
-
-    
-    // INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
-    // std::string indiDeviceName = indiBaseDevice.getDeviceName();
-
-    // std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
-
-    // DeviceConnStateMapT::iterator deviceDataIt = deviceConnections_.find(indiDeviceName);
-    
-    // if (deviceDataIt != deviceConnections_.end()) {
-    //   // Put an empty property as connection property
-    //   deviceDataIt->second.setIndiConnectionProp(INDI::Property());
-    // }
-  }
+  LOG(debug) << "Removed property '" << property.getName() << "'." << std::endl;
 }
 
 
-void IndiDeviceWatchdogT::propertyUpdated(INDI::Property /*property*/) {
-  
-  // if (! std::strcmp(property.getName(), "CONNECTION")) {
-
-  //   INDI::BaseDevice indiBaseDevice = getBaseDeviceFromProperty(property);
-  //   std::string indiDeviceName = indiBaseDevice.getDeviceName();
-
-  //   std::lock_guard<std::mutex> guard(deviceConnectionsMutex_);
-
-  //   DeviceConnStateMapT::iterator deviceDataIt = deviceConnections_.find(indiDeviceName);
-    
-  //   INDI::PropertySwitch connectionSwitch = indiBaseDevice.getSwitch("CONNECTION");
-
-  //   if (deviceDataIt != deviceConnections_.end()) {
-  //     // Update the connection property only
-  //     deviceDataIt->second.setIndiConnectionProp(connectionSwitch);
-  //   }
-  // }  
+void IndiDeviceWatchdogT::propertyUpdated(INDI::Property property) {
+  LOG(debug) << "Updated property '" << property.getName() << "'." << std::endl;
 }
 
 
@@ -231,7 +193,7 @@ bool IndiDeviceWatchdogT::isDeviceValid(INDI::BaseDevice indiBaseDevice) {
  */
 bool IndiDeviceWatchdogT::requestConnectionStateChange(INDI::BaseDevice indiBaseDevice, bool connect) {
 
-  std::cerr << "Sending INDI device " << (connect ? "connect" : " disconnect") << " request for device ' '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
+  LOG(info) << "Sending INDI device '" << (connect ? "connect" : " disconnect") << "' request for device '" << indiBaseDevice.getDeviceName() << "'..." << std::endl;
 
   if (! isDeviceValid(indiBaseDevice)) {
     return false;
@@ -295,7 +257,7 @@ bool IndiDeviceWatchdogT::handleDeviceConnection(DeviceDataT & deviceData) {
   bool linuxDeviceExists = fileExists(deviceData.getLinuxDeviceName());
   bool indiDeviceExists = isDeviceValid(deviceData.getIndiBaseDevice());
   
-  std::cerr << "Processing '" << indiDeviceName << "' -> Linux device exists? " << linuxDeviceExists << ", INDI device exists? " << indiDeviceExists << ", INDI device connected? " << indiDeviceConnected << " (details: " << deviceData << ")" << std::endl;
+  LOG(info) << "Processing '" << indiDeviceName << "' -> Linux device exists? " << linuxDeviceExists << ", INDI device exists? " << indiDeviceExists << ", INDI device connected? " << indiDeviceConnected << " (details: " << deviceData << ")" << std::endl;
 
   if (linuxDeviceExists) {
     // Linux device already existed before
@@ -344,7 +306,7 @@ void IndiDeviceWatchdogT::run() {
 
   // Try to connect to the INDI server forever
   while(true) {
-    std::cerr << "Trying to connect to INDI server...";
+    LOG(info) << "Trying to connect to INDI server...";
 
     // Try to (re-) connect to the INDI server
     client_->connect();
@@ -357,12 +319,12 @@ void IndiDeviceWatchdogT::run() {
       wait_for(isClientConnected, 5000ms);
       connected_ = true;
     } catch (std::runtime_error & exc) {
-      std::cerr << "Timeout!" << std::endl;
+      LOG(info) << "Timeout!" << std::endl;
       connected_ = false;
       continue;
     }
 
-    std::cerr << "Connected!" << std::endl;
+    LOG(info) << "Connected!" << std::endl;
 
     while(connected_) {
       std::this_thread::sleep_for(std::chrono::milliseconds(5000ms));
@@ -373,32 +335,16 @@ void IndiDeviceWatchdogT::run() {
 	bool restarted = handleDeviceConnection(it->second);
 
 	if (restarted) {
-
 	  resetIndiClient();
-	  // std::this_thread::sleep_for(std::chrono::milliseconds(3000ms));
-
-	  // client_->disconnect();
-
-	  // auto isClientDisconnected = [&]() -> bool {
-	  //   return !client_->isConnected();
-	  // };
-  
-	  // try {
-	  //   wait_for(isClientDisconnected, 5000ms);
-	  //   connected_ = false;
-	  // } catch (std::runtime_error & exc) {
-	  //   std::cerr << "Timeout! Assuming disconnected." << std::endl;
-	  //   connected_ = false;
-	  // }
 	  
 	  break;
 	}
       }
       
-      std::cerr << std::endl << std::endl;
+      LOG(info) << std::endl << std::endl;
     }
 
-    std::cerr << "Lost connection to INDI server." << std::endl;
+    LOG(info) << "Lost connection to INDI server." << std::endl;
   }
 
 }

@@ -52,7 +52,6 @@ class IndiDeviceWatchdogT {
   boost::signals2::connection newPropertyListenerConnection_;
   boost::signals2::connection removePropertyListenerConnection_;
   boost::signals2::connection updatePropertyListenerConnection_;
-  //  boost::signals2::connection serverConnectionStateChangedConnection_;
 
   typedef std::map<std::string /*device name*/, DeviceDataT> DeviceConnStateMapT;
   DeviceConnStateMapT deviceConnections_; 

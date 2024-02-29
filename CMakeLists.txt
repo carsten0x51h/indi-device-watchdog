@@ -114,8 +114,16 @@ include(cmake/FindFilesystem.cmake)
 # This line finds the boost lib and headers. 
 set(Boost_NO_BOOST_CMAKE ON) #  Don't do a find_package in config mode before searching for a regular boost install.
 
+
+#
+# Look for BOOST
+#
+# https://stackoverflow.com/questions/17844085/boost-log-with-cmake-causing-undefined-reference-error
+# This line finds the boost lib and headers. 
+set(Boost_NO_BOOST_CMAKE ON) #  Don't do a find_package in config mode before searching for a regular boost install.
+
 find_package (ZLIB REQUIRED)
-find_package(Boost COMPONENTS system thread program_options REQUIRED)
+find_package(Boost COMPONENTS log system thread program_options REQUIRED)
 
 
 ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)

@@ -25,10 +25,11 @@
  *
  ****************************************************************************/
 
-#include <iostream>
 #include <filesystem>
+#include <iostream>
 #include <fstream>
 
+#include "logging.h"
 #include "indi_driver_restart_manager.h"
 
 
@@ -52,7 +53,7 @@ void IndiDriverRestartManagerT::restart(const std::string & indiDriverName) {
   
   if (indiServerPipe.is_open()) {
     std::filesystem::path indiDriverPath = indiBinPath / std::filesystem::path(indiDriverName);
-    std::cerr << "Restarting INDi driver '" << indiDriverPath.string() << "'..." << std::endl;
+    LOG(info) << "Restarting INDi driver '" << indiDriverPath.string() << "'..." << std::endl;
     
     indiServerPipe << "stop " << indiDriverPath.string() << std::endl;
     indiServerPipe << "start " << indiDriverPath.string() << std::endl;
@@ -60,7 +61,7 @@ void IndiDriverRestartManagerT::restart(const std::string & indiDriverName) {
     indiServerPipe.close();
   }
   else {
-    std::cerr << "ERROR: Cannot open INDI server pipe '" <<  indiServerPipePath << "'." << std::endl;
+    LOG(error) << "ERROR: Cannot open INDI server pipe '" <<  indiServerPipePath << "'." << std::endl;
   }
 }
 
