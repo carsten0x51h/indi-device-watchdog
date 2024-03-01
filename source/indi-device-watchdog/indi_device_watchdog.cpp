@@ -70,6 +70,7 @@ void IndiDeviceWatchdogT::resetIndiClient() {
   removePropertyListenerConnection_.disconnect();
   updatePropertyListenerConnection_.disconnect();
 
+
   if (client_ != nullptr) {
     client_->disconnect();
   }
@@ -209,8 +210,22 @@ bool IndiDeviceWatchdogT::requestConnectionStateChange(INDI::BaseDevice indiBase
     // TODO: Better get via propery name "CONNECT" / "DISCONNECT"? -> ISwitch * p = IUFindSwitch(vec, "CONNECT");
     // TODO: Check switch state - IPS_ALERT / IPS_OK...?
     // TODO: Check connectionSwitchVec->sp...
-    connectionSwitchVec->sp[0].s = (connect ? ISS_ON : ISS_OFF);
-    connectionSwitchVec->sp[1].s = (connect ? ISS_OFF : ISS_ON);
+    // connectionSwitchVec->sp[0].s = (connect ? ISS_ON : ISS_OFF);
+    // connectionSwitchVec->sp[1].s = (connect ? ISS_OFF : ISS_ON);
+
+    
+    ISwitch * connectSwitch = IUFindSwitch(connectionSwitchVec, "CONNECT");
+
+    if (connectSwitch != nullptr) {
+      connectSwitch->s = (connect ? ISS_ON : ISS_OFF);
+    }
+
+    ISwitch * disconnectSwitch = IUFindSwitch(connectionSwitchVec, "DISCONNECT");
+
+    if (disconnectSwitch != nullptr) {
+      disconnectSwitch->s = (connect ? ISS_OFF : ISS_ON);
+    }
+
     
     client_->sendNewSwitch(connectionSwitchVec);
 

@@ -38,7 +38,7 @@
 #include "indi_driver_restart_manager.h"
 
 /**
- * TODO: Idea: Rename to IndiDeviceWatchdogT
+ *
  */
 class IndiDeviceWatchdogT {
  private:
