@@ -26,15 +26,18 @@
  ****************************************************************************/
 
 #include <iostream>
+#include <iomanip>
 #include <filesystem>
 #include <string>
 #include <boost/program_options.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 #include "indi_device_watchdog/indi_device_watchdog-version.h"
 #include "indi_device_watchdog.h"
 #include "device_data_persistance.h"
 #include "option_level.h"
 #include "logging.h"
+
 
 std::string composeStartupMessage() {
   std::stringstream ss;
@@ -44,6 +47,11 @@ std::string composeStartupMessage() {
   ss << "Contact: " << INDI_DEVICE_WATCHDOG_AUTHOR_MAINTAINER << std::endl;
   
   return ss.str();
+}
+
+void printErrorHelp(const std::string & errorMsg, const boost::program_options::options_description & options) {
+  std::cerr << std::endl << "Error: " << errorMsg << std::endl << std::endl;
+  std::cerr << options << std::endl;
 }
 
 
@@ -59,32 +67,47 @@ int main(int argc, char *argv[]) {
   
   // Declare the supported options.
   // See also http://stackoverflow.com/questions/17093579/specifying-levels-e-g-verbose-using-boost-program-options
-  options_description options("Astrobox control options");
+  options_description options("INDI device watchdog options");
   options.add_options()
-    ("help", "Display this parameter overview")
-    ("hostname", value<std::string>()->default_value("localhost"), "Set hostname of INDI server")
-    ("port", value<int>()->default_value(7624), "Port of INDI server.")
-    ("indi-bin", value<std::string>()->default_value("/usr/bin"), "Search path for INDI binaries.")
-    ("indi-server-pipe", value<std::string>()->default_value("/tmp/indiserverFIFO"), "Pipe which should be used to write commands to the INDI server.")
-    ("device-config", value<std::string>()->default_value("indi_devices.json"), "Config file with devices to monitor.")
+    ("help,h", "Display this parameter overview")
+    ("hostname,H", value<std::string>()->default_value("localhost"), "Set hostname of INDI server")
+    ("port,p", value<int>()->default_value(7624), "Port of INDI server.")
+    ("indi-bin,B", value<std::string>()->default_value("/usr/bin"), "Search path for INDI binaries.")
+    ("indi-server-pipe,P", value<std::string>()->default_value("/tmp/indiserverFIFO"), "Pipe which should be used to write commands to the INDI server.")
+    ("device-config,D", value<std::string>()->required(), "Config file with devices to monitor.")
     ("verbose,v", level_value(& optionLevel), "Print more verbose messages at each additional verbosity level.")
     ;
 
   variables_map vm;
+  std::string errorMsg;
   
-  store(command_line_parser(argc, argv).options(options).run(), vm);
-  notify(vm);
+  try {
+    store(command_line_parser(argc, argv).options(options).run(), vm);
+    notify(vm);
   
-  
+    std::cout << composeStartupMessage() << std::endl
+	    << INDI_DEVICE_WATCHDOG_PROJECT_DESCRIPTION << std::endl << std::endl;
+
+  } catch (boost::program_options::required_option & exc) {
+    errorMsg = exc.what();  
+  } catch (boost::program_options::invalid_command_line_syntax & exc) {
+    errorMsg = exc.what();
+  }
+
   if (vm.count("help")) {
-    std::cout << INDI_DEVICE_WATCHDOG_PROJECT_NAME << std::endl
-	      << INDI_DEVICE_WATCHDOG_PROJECT_DESCRIPTION << std::endl << std::endl
-	      << "Options: " << std::endl
-	      << options << std::endl;
+    std::cout << options << std::endl;
+      
     return 1;
   }
 
+  
+  if (! errorMsg.empty()) {
+    printErrorHelp(errorMsg, options);
 
+    return 1;
+  }
+  
+  
   logging::trivial::severity_level sev = logging::trivial::warning;
 
   if (vm.count("verbose") > 0) {
@@ -93,36 +116,38 @@ int main(int argc, char *argv[]) {
     sev = static_cast<logging::trivial::severity_level> (sev - verboseLevel);
   }
   
-  // TODO: Remove...
   std::cout << "Set log-level to: " << sev << std::endl;
   
   LoggingT::init(sev, true /*console*/, true /*log file*/);
 
+  
+  try {  
+    fs::path currentPath = fs::current_path();
+    fs::path deviceConfigFilename = vm["device-config"].as<std::string>();
+    fs::path fullPath = currentPath / deviceConfigFilename;
+  
+    std::vector<DeviceDataT> devicesToMonitor = device_data_persistance::load(deviceConfigFilename);
 
+    std::string indiHostname = vm["hostname"].as<std::string>();
+    int indiPort = vm["port"].as<int>();
+    std::string indiBinPath = vm["indi-bin"].as<std::string>();
+    std::string indiServerPipePath = vm["indi-server-pipe"].as<std::string>();
+  
+    IndiDeviceWatchdogT indiDeviceWatchdog(indiHostname, indiPort, devicesToMonitor, indiBinPath, indiServerPipePath);
 
+    indiDeviceWatchdog.run();
+  } catch (boost::property_tree::json_parser::json_parser_error & exc) {
+    errorMsg = exc.what();
+  } catch (boost::bad_any_cast & exc) {
+    errorMsg = exc.what();
+  }
+
+  if (! errorMsg.empty()) {
+    printErrorHelp(errorMsg, options);    
+
+    return 1;
+  }
 
   
-
-
-
-	  
-  std::cout << composeStartupMessage() << std::endl;
-  
-  
-  fs::path currentPath = fs::current_path();
-  fs::path deviceConfigFilename = vm["device-config"].as<std::string>();
-  fs::path fullPath = currentPath / deviceConfigFilename;
-  
-  std::vector<DeviceDataT> devicesToMonitor = device_data_persistance::load(deviceConfigFilename);
-
-  std::string indiHostname = vm["hostname"].as<std::string>();
-  int indiPort = vm["port"].as<int>();
-  std::string indiBinPath = vm["indi-bin"].as<std::string>();
-  std::string indiServerPipePath = vm["indi-server-pipe"].as<std::string>();
-  
-  IndiDeviceWatchdogT indiDeviceWatchdog(indiHostname, indiPort, devicesToMonitor, indiBinPath, indiServerPipePath);
-
-  indiDeviceWatchdog.run();
-    
   return 0;
 }
