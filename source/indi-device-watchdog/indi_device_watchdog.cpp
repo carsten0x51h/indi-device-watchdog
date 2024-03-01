@@ -37,7 +37,7 @@
 
 #include "indi_device_watchdog.h"
 
-IndiDeviceWatchdogT::IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor) : hostname_(hostname), port_(port) {
+IndiDeviceWatchdogT::IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor, const std::string & indiBinPath, const std::string & indiServerPipePath) : hostname_(hostname), port_(port), indiDriverRestartManager_(3, indiBinPath, indiServerPipePath) {
   using namespace std::chrono_literals;
 
   resetIndiClient();
@@ -46,7 +46,6 @@ IndiDeviceWatchdogT::IndiDeviceWatchdogT(const std::string & hostname, int port,
   for (auto it = devicesToMonitor.begin(); it != devicesToMonitor.end(); ++it) {
     deviceConnections_.insert( std::pair<std::string, DeviceDataT>(it->getIndiDeviceName(), *it) );
   }
-
 }
 
 IndiDeviceWatchdogT::~IndiDeviceWatchdogT() {

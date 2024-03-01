@@ -34,12 +34,14 @@ class IndiDriverRestartManagerT {
  private:
   int restartTriggerLimit_;
   std::map<std::string, int> driverRestartMap_;
-
+  std::string indiBinPath_;
+  std::string indiServerPipe_;
+  
   void restart(const std::string & indiDriverName);
   
  public:
   IndiDriverRestartManagerT();
-  IndiDriverRestartManagerT(int restartTriggerLimit);
+  IndiDriverRestartManagerT(int restartTriggerLimit, const std::string & indiBinPath, const std::string & indiServerPipe);
   
   bool requestRestart(const std::string & indiDriverName);
   void requestImmediateRestart(const std::string & indiDriverName);

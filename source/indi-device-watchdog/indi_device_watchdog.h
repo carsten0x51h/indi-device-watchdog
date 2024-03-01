@@ -79,7 +79,7 @@ class IndiDeviceWatchdogT {
 
   
  public:
-  IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor);
+  IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor, const std::string & indiBinPath, const std::string & indiServerPipePath);
   ~IndiDeviceWatchdogT();
   
   void run();

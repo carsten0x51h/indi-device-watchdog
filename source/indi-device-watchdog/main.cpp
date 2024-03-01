@@ -55,9 +55,11 @@ int main(int argc, char *argv[]) {
   options_description options("Astrobox control options");
   options.add_options()
     ("help", "Display this parameter overview")
-    ("hostname", value<std::string>()->default_value("localhost"), "Set hostname of INDi server")
+    ("hostname", value<std::string>()->default_value("localhost"), "Set hostname of INDI server")
     ("port", value<int>()->default_value(7624), "Port of INDI server.")
-    ("config", value<std::string>()->default_value("indi_devices.json"), "Config file with devices to monitor.")    
+    ("indi-bin", value<std::string>()->default_value("/usr/bin"), "Search path for INDI binaries.")
+    ("indi-server-pipe", value<std::string>()->default_value("/tmp/indiserverFIFO"), "Pipe which should be used to write commands to the INDI server.")
+    ("device-config", value<std::string>()->default_value("indi_devices.json"), "Config file with devices to monitor.")
     ;
 
   variables_map vm;
@@ -84,15 +86,17 @@ int main(int argc, char *argv[]) {
   
   
   fs::path currentPath = fs::current_path();
-  fs::path configFilename = vm["config"].as<std::string>();
-  fs::path fullPath = currentPath / configFilename;
+  fs::path deviceConfigFilename = vm["device-config"].as<std::string>();
+  fs::path fullPath = currentPath / deviceConfigFilename;
   
-  std::vector<DeviceDataT> devicesToMonitor = device_data_persistance::load(configFilename);
+  std::vector<DeviceDataT> devicesToMonitor = device_data_persistance::load(deviceConfigFilename);
 
   std::string indiHostname = vm["hostname"].as<std::string>();
   int indiPort = vm["port"].as<int>();
+  std::string indiBinPath = vm["indi-bin"].as<std::string>();
+  std::string indiServerPipePath = vm["indi-server-pipe"].as<std::string>();
   
-  IndiDeviceWatchdogT indiDeviceWatchdog(indiHostname, indiPort, devicesToMonitor);
+  IndiDeviceWatchdogT indiDeviceWatchdog(indiHostname, indiPort, devicesToMonitor, indiBinPath, indiServerPipePath);
 
   indiDeviceWatchdog.run();
     

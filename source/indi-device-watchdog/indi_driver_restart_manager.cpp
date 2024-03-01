@@ -33,11 +33,12 @@
 #include "indi_driver_restart_manager.h"
 
 
-IndiDriverRestartManagerT::IndiDriverRestartManagerT() : restartTriggerLimit_(3) {
+IndiDriverRestartManagerT::IndiDriverRestartManagerT() : restartTriggerLimit_(3), indiBinPath_("/usr/bin"), indiServerPipe_("/tmp/indiserverFIFO") {
 }
 
 
-IndiDriverRestartManagerT::IndiDriverRestartManagerT(int restartTriggerLimit) : restartTriggerLimit_(restartTriggerLimit) {
+IndiDriverRestartManagerT::IndiDriverRestartManagerT(int restartTriggerLimit, const std::string & indiBinPath, const std::string & indiServerPipe) : restartTriggerLimit_(restartTriggerLimit), indiBinPath_(indiBinPath), indiServerPipe_(indiServerPipe) {
+
 }
 
 
@@ -47,12 +48,10 @@ void IndiDriverRestartManagerT::reset() {
 
 
 void IndiDriverRestartManagerT::restart(const std::string & indiDriverName) {
-  std::string indiBinPath = "/usr/bin"; // TODO: Make configurable...
-  std::filesystem::path indiServerPipePath = "/tmp/indiserverFIFO"; // TODO: make configurable...
-  std::ofstream indiServerPipe(indiServerPipePath);
+  std::ofstream indiServerPipe(indiServerPipe_);
   
   if (indiServerPipe.is_open()) {
-    std::filesystem::path indiDriverPath = indiBinPath / std::filesystem::path(indiDriverName);
+    std::filesystem::path indiDriverPath = indiBinPath_ / std::filesystem::path(indiDriverName);
     LOG(info) << "Restarting INDi driver '" << indiDriverPath.string() << "'..." << std::endl;
     
     indiServerPipe << "stop " << indiDriverPath.string() << std::endl;
@@ -61,7 +60,7 @@ void IndiDriverRestartManagerT::restart(const std::string & indiDriverName) {
     indiServerPipe.close();
   }
   else {
-    LOG(error) << "ERROR: Cannot open INDI server pipe '" <<  indiServerPipePath << "'." << std::endl;
+    LOG(error) << "ERROR: Cannot open INDI server pipe '" <<  indiServerPipe_ << "'." << std::endl;
   }
 }
 
