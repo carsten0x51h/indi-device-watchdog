@@ -39,7 +39,7 @@ namespace device_data_persistance {
    * Load devices to monitor from a JSON file to a vector of DeviceDataT objects.
    */
   std::vector<DeviceDataT> load(const std::filesystem::path & configFilePath) {
-
+    
     boost::property_tree::ptree rootPt;
     boost::property_tree::json_parser::read_json(configFilePath.string(), rootPt);
     std::vector<DeviceDataT> deviceDataVec;
@@ -83,8 +83,6 @@ namespace device_data_persistance {
     
   //   rootPt.add_child("indiDevices", devicesPt);
     
-
-  //   // TODO: Open ooutput stream for configFilePath...
   //   boost::property_tree::json_parser::write_json(std::cout, rootPt);
   // }
   

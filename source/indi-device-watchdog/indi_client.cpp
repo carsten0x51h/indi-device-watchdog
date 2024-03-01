@@ -138,7 +138,6 @@ void IndiClientT::newMessage(INDI::BaseDevice dp, int messageID) {
 #endif
 
 
-// TODO: We may have to change the connection logic - INDI client API blocks??!
 void IndiClientT::serverConnected() {
     notifyServerConnectionStateChanged(IndiServerConnectionStateT::CONNECTED);
 }
@@ -148,16 +147,17 @@ void IndiClientT::serverDisconnected(int /*exit_code*/) {
 }
 
 void IndiClientT::connectToIndiServerBlocking() {
+  
+  // This function is blocking and therefore needs to be in a separate thread
+  bool connectIndiServerResult = this->connectServer();
 
-    // This function is blocking and therefore needs to be in a separate thread
-    bool connectIndiServerResult = this->connectServer();
-
-    if (!connectIndiServerResult) {
-        // Emit a failure signal...
-        notifyServerConnectionFailed();
-    } else {
-        // Do not emit a success signal since this will already happen from within the INDI server...
-    }
+  if (!connectIndiServerResult) {
+    // Emit a failure signal...
+    notifyServerConnectionFailed();
+  } else {
+    // NOTE: Do not emit a success signal since this will already
+    // happen from within the INDI server...
+  }
 }
 
 void IndiClientT::connect() {

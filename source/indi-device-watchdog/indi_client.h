@@ -37,7 +37,6 @@
 #include <boost/signals2.hpp>
 #include <thread>
 
-// TODO: Maybe better inherit protected...
 class IndiClientT : public INDI::BaseClient {
 private:
 

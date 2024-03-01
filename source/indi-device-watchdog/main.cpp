@@ -33,6 +33,7 @@
 #include "indi_device_watchdog/indi_device_watchdog-version.h"
 #include "indi_device_watchdog.h"
 #include "device_data_persistance.h"
+#include "option_level.h"
 #include "logging.h"
 
 std::string composeStartupMessage() {
@@ -50,8 +51,14 @@ int main(int argc, char *argv[]) {
 
   using namespace boost::program_options;
   namespace fs = std::filesystem;  
+
+  typedef OptionLevelT<'v'> VOptionLevelT;
+
+  unsigned verbosity = 0U;
+  VOptionLevelT optionLevel(verbosity);
   
   // Declare the supported options.
+  // See also http://stackoverflow.com/questions/17093579/specifying-levels-e-g-verbose-using-boost-program-options
   options_description options("Astrobox control options");
   options.add_options()
     ("help", "Display this parameter overview")
@@ -60,6 +67,7 @@ int main(int argc, char *argv[]) {
     ("indi-bin", value<std::string>()->default_value("/usr/bin"), "Search path for INDI binaries.")
     ("indi-server-pipe", value<std::string>()->default_value("/tmp/indiserverFIFO"), "Pipe which should be used to write commands to the INDI server.")
     ("device-config", value<std::string>()->default_value("indi_devices.json"), "Config file with devices to monitor.")
+    ("verbose,v", level_value(& optionLevel), "Print more verbose messages at each additional verbosity level.")
     ;
 
   variables_map vm;
@@ -75,14 +83,30 @@ int main(int argc, char *argv[]) {
 	      << options << std::endl;
     return 1;
   }
-  
 
-  // TODO: Pass in log-level via cmdline
-  logging::trivial::severity_level sev = logging::trivial::debug;
+
+  logging::trivial::severity_level sev = logging::trivial::warning;
+
+  if (vm.count("verbose") > 0) {
+    const VOptionLevelT & ol = vm["verbose"].as<VOptionLevelT>();
+    unsigned verboseLevel = (ol.n <= 3 ? ol.n : 3);
+    sev = static_cast<logging::trivial::severity_level> (sev - verboseLevel);
+  }
+  
+  // TODO: Remove...
+  std::cout << "Set log-level to: " << sev << std::endl;
+  
   LoggingT::init(sev, true /*console*/, true /*log file*/);
 
 
-  LOG(info) << composeStartupMessage() << std::endl;
+
+
+  
+
+
+
+	  
+  std::cout << composeStartupMessage() << std::endl;
   
   
   fs::path currentPath = fs::current_path();

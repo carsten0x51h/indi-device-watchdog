@@ -18,6 +18,7 @@ set(sources
 	enum_helper.h
 	device_data.h
 	device_data.cpp
+	option_level.h
 	logging.h
 	logging.cpp
 	device_data_persistance.h	
@@ -77,6 +78,7 @@ target_link_libraries(${target}
         ${Boost_SYSTEM_LIBRARY}
 		"$<$<AND:$<CXX_COMPILER_ID:GNU>,$<VERSION_LESS:$<CXX_COMPILER_VERSION>,9.0>>:stdc++fs>"
 	${Boost_PROGRAM_OPTIONS_LIBRARY}
+        ${Boost_REGEX_LIBRARY}
         ${INDI_LIBRARIES}
         ${ZLIB_LIBRARIES}
 	${DEFAULT_LINKER_OPTIONS}

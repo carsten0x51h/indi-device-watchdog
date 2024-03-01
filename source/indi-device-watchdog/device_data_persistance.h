@@ -35,7 +35,6 @@
 
 #include "device_data.h"
 
-// TODO: Keep the namespace?
 namespace device_data_persistance {
 
   std::vector<DeviceDataT> load(const std::filesystem::path & configFilePath);
