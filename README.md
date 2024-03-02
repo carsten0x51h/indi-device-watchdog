@@ -23,7 +23,7 @@ Please visit my blog https://www.lost-infinity.com for further details. The firs
 ## build
 
 ### Install required dependencies
-The following libraries are required to build FoFi on Ubuntu 20.04 LTS.
+The following libraries are required to build the INDI device watchdog on Ubuntu 20.04 LTS / Ubuntu 22.04 or Raspberry Pi OS.
 For other Linux distributions the package names may slightly vary.
 
 	sudo apt-get update
@@ -47,17 +47,6 @@ To build from command line, simply do the following steps:
 This will generate the build environment for your operating system. It will fail
 if at least one dependency to an external library could not be resolved.
 
-The rest of this section is optional. To get finer grained control over the cmake process
-the following options are available (the first one is always the _default_): 
-
-	cmake .. -DOPTION_BUILD_DOC=OFF|ON
-		 -DCMAKE_BUILD_TYPE=RELEASE|DEBUG|COVERAGE|PERF
-		 -DCMAKE_VERBOSE_MAKEFILE:BOOL=OFF|ON
-		 -DOPTION_ENABLE_CLANG_TIDY=ON|OFF
-		 -DCMAKE_CXX_CLANG_TIDY="clang-tidy;-checks=-*,readability-*"
-		 -DCMAKE_C_COMPILER=clang|gcc
-		 -DCMAKE_CXX_COMPILER=clang++|g++
-
 
 ### Build the code
 Run the following command to build the project: 
@@ -66,11 +55,28 @@ Run the following command to build the project:
 
 or to build parallel on e.g. 12 cores, run
 
+```
 	cmake --build . -j12 -- all
+```
 
 ### Run the program
 To run the INDI device watchdog simply execute
 
-    ./indi_device_watchdog
+```
+./indi_device_watchdog --help
+INDI device watchdog options:
+  -h [ --help ]                         Display this parameter overview
+  -H [ --hostname ] arg (=localhost)    Set hostname of INDI server
+  -p [ --port ] arg (=7624)             Port of INDI server.
+  -T [ --timeout ] arg (=3)             Timeout in seconds.
+  -B [ --indi-bin ] arg (=/usr/bin)     Search path for INDI binaries.
+  -P [ --indi-server-pipe ] arg (=/tmp/indiserverFIFO)
+                                        Pipe which should be used to write 
+                                        commands to the INDI server.
+  -D [ --device-config ] arg            Config file with devices to monitor.
+  -v [ --verbose ] arg                  Print more verbose messages at each 
+                                        additional verbosity level.	
+
+```
 
 ...
