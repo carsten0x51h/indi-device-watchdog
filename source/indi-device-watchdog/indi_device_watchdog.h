@@ -44,6 +44,7 @@ class IndiDeviceWatchdogT {
  private:
   std::string hostname_;
   int port_;
+  int timeoutSec_;
   std::shared_ptr<IndiClientT> client_;
   bool connected_;
   boost::signals2::connection serverConnectionFailedListenerConnection_;
@@ -79,7 +80,7 @@ class IndiDeviceWatchdogT {
 
   
  public:
-  IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor, const std::string & indiBinPath, const std::string & indiServerPipePath);
+  IndiDeviceWatchdogT(const std::string & hostname, int port, int timeoutSec, const std::vector<DeviceDataT> & devicesToMonitor, const std::string & indiBinPath, const std::string & indiServerPipePath);
   ~IndiDeviceWatchdogT();
   
   void run();

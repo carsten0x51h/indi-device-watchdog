@@ -48,6 +48,5 @@ void LoggingT::init(const logging::trivial::severity_level &inLogSev, bool inWan
 
     logging::core::get()->set_filter(logging::trivial::severity >= inLogSev);
 
-    // TODO: Required? What exactly does this function?!
     logging::add_common_attributes();
 }

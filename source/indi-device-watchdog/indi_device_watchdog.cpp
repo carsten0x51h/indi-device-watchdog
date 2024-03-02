@@ -37,7 +37,7 @@
 
 #include "indi_device_watchdog.h"
 
-IndiDeviceWatchdogT::IndiDeviceWatchdogT(const std::string & hostname, int port, const std::vector<DeviceDataT> & devicesToMonitor, const std::string & indiBinPath, const std::string & indiServerPipePath) : hostname_(hostname), port_(port), indiDriverRestartManager_(3, indiBinPath, indiServerPipePath) {
+IndiDeviceWatchdogT::IndiDeviceWatchdogT(const std::string & hostname, int port, int timeoutSec, const std::vector<DeviceDataT> & devicesToMonitor, const std::string & indiBinPath, const std::string & indiServerPipePath) : hostname_(hostname), port_(port), timeoutSec_(timeoutSec), indiDriverRestartManager_(3, indiBinPath, indiServerPipePath) {
   using namespace std::chrono_literals;
 
   resetIndiClient();
@@ -82,7 +82,8 @@ void IndiDeviceWatchdogT::resetIndiClient() {
   client_ = std::make_shared<IndiClientT>(); // Create a new client
   
   client_->setServer(hostname_.c_str(), port_);
-  
+  client_->setConnectionTimeout(timeoutSec_, 0);
+    
   serverConnectionFailedListenerConnection_ = client_->registerServerConnectionFailedListener([&]() {
     LOG(error) << "Connection to INDI server failed." << std::endl;
     connected_ = false;

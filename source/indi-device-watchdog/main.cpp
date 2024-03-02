@@ -72,6 +72,7 @@ int main(int argc, char *argv[]) {
     ("help,h", "Display this parameter overview")
     ("hostname,H", value<std::string>()->default_value("localhost"), "Set hostname of INDI server")
     ("port,p", value<int>()->default_value(7624), "Port of INDI server.")
+    ("timeout,T", value<int>()->default_value(3), "Timeout in seconds.")
     ("indi-bin,B", value<std::string>()->default_value("/usr/bin"), "Search path for INDI binaries.")
     ("indi-server-pipe,P", value<std::string>()->default_value("/tmp/indiserverFIFO"), "Pipe which should be used to write commands to the INDI server.")
     ("device-config,D", value<std::string>()->required(), "Config file with devices to monitor.")
@@ -91,6 +92,8 @@ int main(int argc, char *argv[]) {
   } catch (boost::program_options::required_option & exc) {
     errorMsg = exc.what();  
   } catch (boost::program_options::invalid_command_line_syntax & exc) {
+    errorMsg = exc.what();
+  } catch (boost::program_options::invalid_option_value & exc) {
     errorMsg = exc.what();
   }
 
@@ -130,10 +133,11 @@ int main(int argc, char *argv[]) {
 
     std::string indiHostname = vm["hostname"].as<std::string>();
     int indiPort = vm["port"].as<int>();
+    int timeoutSec = vm["timeout"].as<int>();
     std::string indiBinPath = vm["indi-bin"].as<std::string>();
     std::string indiServerPipePath = vm["indi-server-pipe"].as<std::string>();
   
-    IndiDeviceWatchdogT indiDeviceWatchdog(indiHostname, indiPort, devicesToMonitor, indiBinPath, indiServerPipePath);
+    IndiDeviceWatchdogT indiDeviceWatchdog(indiHostname, indiPort, timeoutSec, devicesToMonitor, indiBinPath, indiServerPipePath);
 
     indiDeviceWatchdog.run();
   } catch (boost::property_tree::json_parser::json_parser_error & exc) {

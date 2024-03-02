@@ -162,8 +162,6 @@ void IndiClientT::connectToIndiServerBlocking() {
 
 void IndiClientT::connect() {
 
-    // TODO: Use setConnectionTimeout(uint32_t seconds, uint32_t microseconds) from base class to set the INDI server connection timeout (default is 3 seconds).
-
     if (!this->isServerConnected()) {
         notifyServerConnectionStateChanged(IndiServerConnectionStateT::CONNECTING);
 

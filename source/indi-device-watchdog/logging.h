@@ -62,7 +62,7 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(global_logger, global_logger_type) {
     return global_logger_type(boost::log::keywords::channel = "global_logger");
 }
 
-// TODO: Do we need channels? See http://www.boost.org/doc/libs/1_54_0/libs/log/doc/html/log/detailed/sources.html
+// See http://www.boost.org/doc/libs/1_54_0/libs/log/doc/html/log/detailed/sources.html
 class LoggingT {
 private:
 
