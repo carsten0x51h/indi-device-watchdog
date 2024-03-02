@@ -55,12 +55,18 @@ Run the following command to build the project:
 
 or to build parallel on e.g. 12 cores, run
 
-```
 	cmake --build . -j12 -- all
-```
 
-### Run the program
-To run the INDI device watchdog simply execute
+### Create device configuration
+TODO
+
+### Controlling the INDI server
+TODO: Describe creation of INDI server pipe /tmp/indiserverFIFO....
+...
+
+
+### Run the INDI device watcdog
+To run the INDI device watchdog the first time simply execute the following command to get an overview of the options:
 
 ```
 ./indi_device_watchdog --help
@@ -79,4 +85,10 @@ INDI device watchdog options:
 
 ```
 
-...
+
+Example: ... Defaults... INDI server runs on port 7624 on localhost.... Location of INDI driver binaries are in /usr/bin 
+
+	sudo ./indi_device_watchdog -D my-indi-device-config.json
+
+
+
