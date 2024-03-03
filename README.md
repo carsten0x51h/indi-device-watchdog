@@ -4,7 +4,22 @@ INDI Device Watchdog
 ====================
 
 ## Summary
-TODO...
+This little software project is about...
+
+
+## Motivation
+In a perfect world you wouldn't need this piece of software. Unfortunately, the world is not always perfect - especially when it comes to IT. When using the INDI software in the field with my astro imaging hardware I ran into multiple unreliabilities which in the end made some imaging sessions fail and caused some frustation. The main reason: Unreliable USB connections mainly due to drained plugs.
+
+Over the years, some of the USB ports on my astro equipment have become a little wonky and slightly unreliable. Still, replacing an entire astronomy camera because of that is way to expensive (at least for me). Loosing the connection (even just for a second) leads to a chain of events:
+
+ 1. It often took minutes to realize that a device had physically lost connection.
+ 2. The INDI driver did not realize the unavailability of the Linux device and thought it was still connected.
+ 3. Trying to disconnect the INDI driver made the driver not respond anymore or sometimes - if disconnecting worked -  reconnecting the INDI driver mostly failed.
+ 4. Some INDI drivers hung or crashed due to temporary unavailability of the Linux device (some drivers do not detect when a Linux devices disappears or do not handle this situation correctly)
+ 5. Physically reconnecting the device worked on the Linux level but on the INDI level it often did not (even after making sure that the Linux device is always the same after a physical reconnect).
+ 6. Often the only chance to solve this problem was to restart the INDI server (I later learned tat this is not always required - see section "Controlling the INDI server").
+
+Restarting the INDI server in the middle of an imaging session typically ruins the entire image and I had to start all over again. Two of those fails could ruin an entire astro evening.
 
 
 ## Project vision
