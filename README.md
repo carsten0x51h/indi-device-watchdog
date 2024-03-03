@@ -4,7 +4,15 @@ INDI Device Watchdog
 ====================
 
 ## Summary
-This little software project is about...
+This software project aims to improve the overall availability and connectivity of INDI devices after a connection loss without the need to restart the INDI server. This is especially helpful for astronomy devices with often used USB plugs which have become a bit unreliable. The indi-device-watchdog monitors a list of specified INDI devices and their corresponding Linux devices. Under certain conditions it directly instructs the INDI server to restart an INDI driver without restarting the entire INDI server. This can improve the overall reliability of the setup. Furthermore, the watchdog can be instructed to automatically connect INDI devices whenever they get disconnected or when the setup was just started.
+
+
+## Supported platforms
+The software was tested on Ubuntu 20.04 LTS, Ubuntu 22.04, Ubuntu 23.10 and Raspbian GNU/Linux 12 (bookworm).
+
+
+## Supported INDI versions
+The software currently supports older INDI versions (e.g. 1.8.4) with the old API and also new INDI versions (e.g. 2.0.4) with the new API. 
 
 
 ## Motivation
@@ -29,7 +37,7 @@ The idea is simple: A hardware device - say an USB camera - has a representation
 
 
 ## Further information
-Please visit my blog https://www.lost-infinity.com for further details. The first article I published about this project can be found here: https://www.lost-infinity.com/indi-device-watchdog
+Please visit my blog https://www.lost-infinity.com for further details and potentially related projects.
 
 
 ## build
@@ -158,7 +166,7 @@ INDI device watchdog options:
 ```
 
 
-Example: ... Defaults... INDI server runs on port 7624 on localhost.... Location of INDI driver binaries are in /usr/bin 
+Simple example: Assuming the INDI server runs on localhost on the default port and the INDI binaries are located in /usr/bin, the command boils down to:
 
 	sudo ./indi_device_watchdog -D my-indi-device-config.json
 
