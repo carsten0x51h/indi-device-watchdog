@@ -23,7 +23,7 @@ Restarting the INDI server in the middle of an imaging session typically ruins t
 
 
 ## The idea
-The idea is simple: A hardware device - say an USB camera - has a representation on the Linux OS level (typically something like /dev/video0) and a representation within the INDI server as an INDI driver (e.g. indi_v4l2_ccd). The watchdog can monitor the Linux device and the corresponding INDI device and try to manage connection of the INDI device in case the Linux device disappears or re-appears. Since the INDI server allows to stop and start dedicated device drivers without restarting the entire INDI server (see [Controlling the INDI server](#custom-id) below), the indi-device-watchdog can also restart a dedicated device driver in case the Linux device exists but the crresponding INDI device is not available or connecting the INDI device fails. The following illustration gives an overview:
+The idea is simple: A hardware device - say an USB camera - has a representation on the Linux OS level (typically something like /dev/video0) and a representation within the INDI server as an INDI driver (e.g. indi_v4l2_ccd). The watchdog can monitor the Linux device and the corresponding INDI device and try to manage connection of the INDI device in case the Linux device disappears or re-appears. Since the INDI server allows to stop and start dedicated device drivers without restarting the entire INDI server (see [Controlling the INDI server](#controlling-the-indi-server) below), the indi-device-watchdog can also restart a dedicated device driver in case the Linux device exists but the crresponding INDI device is not available or connecting the INDI device fails. The following illustration gives an overview:
 
 ![INDI Device Watchdog System Overview](doc/images/indi-device-watchdog-overview.svg)
 
@@ -109,7 +109,7 @@ To tell the INDI device watchdog which INDI devices and corresponding Linux devi
 }
 ```
 
-### Controlling the INDI server{#custom_id}
+### Controlling the INDI server
 
 TODO: Describe creation of INDI server pipe /tmp/indiserverFIFO....
 ...
