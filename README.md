@@ -181,7 +181,7 @@ For my Atik383L+ camera I added the following udev rules to /etc/udev/rules.d/84
 The rules create and remove a file in the /tmp directory when my Atik383L+ camera is plugged in/out.
 
 ```
-ACTION=="add", ATTRS{idVendor}=="20e7", ATTRS{idProduct}=="df31", RUN+="/usr/bin/touch /tmp/atik383"
-ACTION=="remove", ENV{PRODUCT}=="20e7/df31/d49f", RUN+="/bin/rm -rf /tmp/atik383"
+ACTION=="add", ATTRS{idVendor}=="20d6", ATTRS{idProduct}=="da30", RUN+="/usr/bin/touch /tmp/atik383"
+ACTION=="remove", ENV{PRODUCT}=="20d6/da30/d49f", RUN+="/bin/rm -rf /tmp/atik383"
 ```
 This is probably a hack and there are better ways to do it but for now it works. Feel free to drop me a note when you have a better idea. I may incorporate it into the INDI device watchdog.
