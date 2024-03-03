@@ -171,4 +171,17 @@ Simple example: Assuming the INDI server runs on localhost on the default port a
 	sudo ./indi_device_watchdog -D my-indi-device-config.json
 
 
+### Allow the INDI device watchdog to monitor devices which have no representation in /dev (e.g. Atik 383L+)
 
+Some USB devices have no representation in the /dev folder of the Linux system. However, the INDI device watchdog currently checks for such a file to determine if a device is available on the Linux level or not. In order to make a device visible on that level to the watchdog, udev rules can be used. Each USB device - when plugged in - sends a bunch of information to the PC. In most cases the vendor ID and the product ID are already sufficient to identify a certain device. The udev daemon can be conigured to create and remove a temporary file when a given device is plugged in or removed. For this purpose "udev" rules are used. There are tons of details available on the web about this topic. Just in short: The command "lsusb" helps to identify the vendor ID and the product ID of a given device.
+
+	lsusb
+
+For my Atik383L+ camera I added the following udev rules to /etc/udev/rules.d/84-atik383.rules.
+The rules create and remove a file in the /tmp directory when my Atik383L+ camera is plugged in/out.
+
+```
+ACTION=="add", ATTRS{idVendor}=="20e7", ATTRS{idProduct}=="df31", RUN+="/usr/bin/touch /tmp/atik383"
+ACTION=="remove", ENV{PRODUCT}=="20e7/df31/d49f", RUN+="/bin/rm -rf /tmp/atik383"
+```
+This is probably a hack and there are better ways to do it but for now it works. Feel free to drop me a note when you have a better idea. I may incorporate it into the INDI device watchdog.
