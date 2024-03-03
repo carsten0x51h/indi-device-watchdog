@@ -14,7 +14,7 @@ TODO...
 ## System overview
 TODO...
 
-![INDI Device Watchdog System Overview](doc/images/indi-device-watchdog-overview.svg)
+![INDI Device Watchdog System Overview](doc/images/indi-device-watchdog-overview.pdf)
 
 ## Further information
 Please visit my blog https://www.lost-infinity.com for further details. The first article I published about this project can be found here: https://www.lost-infinity.com/indi-device-watchdog
