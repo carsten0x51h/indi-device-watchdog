@@ -272,8 +272,9 @@ bool IndiDeviceWatchdogT::handleDeviceConnection(DeviceDataT & deviceData) {
   bool linuxDeviceExists = fileExists(deviceData.getLinuxDeviceName());
   bool indiDeviceExists = isDeviceValid(deviceData.getIndiBaseDevice());
   
-  LOG(info) << "Processing '" << indiDeviceName << "' -> Linux device exists? " << linuxDeviceExists << ", INDI device exists? " << indiDeviceExists << ", INDI device connected? " << indiDeviceConnected << " (details: " << deviceData << ")" << std::endl;
-
+  LOG(info) << "Processing '" << indiDeviceName << "' -> Linux device exists? " << linuxDeviceExists << ", INDI device exists? " << indiDeviceExists << ", INDI device connected? " << indiDeviceConnected;
+  LOG(debug) << " (details: " << deviceData << ")" << std::endl;
+  
   if (linuxDeviceExists) {
     // Linux device already existed before
     if (! indiDeviceExists) {

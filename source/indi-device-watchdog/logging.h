@@ -67,9 +67,9 @@ class LoggingT {
 private:
 
 public:
-    static void
-    init(const logging::trivial::severity_level &inLogSev = logging::trivial::debug, bool inWantConsoleLog = false,
-         bool inWantLogFile = true);
+  static void
+  init(const logging::trivial::severity_level &inLogSev = logging::trivial::debug, bool inWantConsoleLog = false,
+       bool inWantLogFile = true);
 };
 
 
