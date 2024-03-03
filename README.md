@@ -14,22 +14,19 @@ Over the years, some of the USB ports on my astro equipment have become a little
 
  1. It often took minutes to realize that a device had physically lost connection.
  2. The INDI driver did not realize the unavailability of the Linux device and thought it was still connected.
- 3. Trying to disconnect the INDI driver made the driver not respond anymore or sometimes - if disconnecting worked -  reconnecting the INDI driver mostly failed.
+ 3. Trying to disconnect the INDI driver made the driver not respond anymore or sometimes - if disconnecting worked - reconnecting the INDI driver mostly failed.
  4. Some INDI drivers hung or crashed due to temporary unavailability of the Linux device (some drivers do not detect when a Linux devices disappears or do not handle this situation correctly)
  5. Physically reconnecting the device worked on the Linux level but on the INDI level it often did not (even after making sure that the Linux device is always the same after a physical reconnect).
- 6. Often the only chance to solve this problem was to restart the INDI server (I later learned tat this is not always required - see section "Controlling the INDI server").
+ 6. Often the only chance to solve this problem was to restart the INDI server (I later learned that this is not always required - see section "Controlling the INDI server").
 
-Restarting the INDI server in the middle of an imaging session typically ruins the entire image and I had to start all over again. Two of those fails could ruin an entire astro evening.
-
-
-## Project vision
-TODO...
+Restarting the INDI server in the middle of an imaging session typically ruins the entire image and even worse - the telescope alignment may have to be repeated. Two of those fails typically ruin an entire astro evening. To avoid such prolems in the future I did some research and came up with this little program - the "indi-device-watchdog".
 
 
-## System overview
-TODO...
+## The idea
+The idea is simple: A hardware device - say an USB camera - has a representation on the Linux OS level (typically something like /dev/video0) and a representation within the INDI server as an INDI driver (e.g. indi_v4l2_ccd). The watchdog can monitor the Linux device and the corresponding INDI device and try to manage connection of the INDI device in case the Linux device disappears or re-appears. Since the INDI server allows to stop and start dedicated device drivers without restarting the entire INDI server (see [Controlling the INDI server](#section-controlling-tje-indi-server) below), the indi-device-watchdog can also restart a dedicated device driver in case the Linux device exists but the crresponding INDI device is not available or connecting the INDI device fails. The following illustration gives an overview:
 
 ![INDI Device Watchdog System Overview](doc/images/indi-device-watchdog-overview.svg)
+
 
 ## Further information
 Please visit my blog https://www.lost-infinity.com for further details. The first article I published about this project can be found here: https://www.lost-infinity.com/indi-device-watchdog
@@ -113,6 +110,7 @@ To tell the INDI device watchdog which INDI devices and corresponding Linux devi
 ```
 
 ### Controlling the INDI server
+#section-controlling-tje-indi-server
 TODO: Describe creation of INDI server pipe /tmp/indiserverFIFO....
 ...
 
