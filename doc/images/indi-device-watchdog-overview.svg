@@ -115,46 +115,46 @@
         <g
            id="g24" />
         <path
-           d="M 364.819,108.454 H 124.157 v 43.228 H 605.48 v -43.228 z"
+           d="M 347.811,108.454 H 107.15 v 43.228 h 481.322 v -43.228 z"
            style="fill:#77bc65;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path26" />
         <g
            id="g28">
           <path
-             d="M 364.819,108.454 H 124.157 v 43.228 H 605.48 v -43.228 z"
+             d="M 347.811,108.454 H 107.15 v 43.228 h 481.322 v -43.228 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path30" />
         </g>
         <path
-           d="M 364.819,169.512 H 124.157 V 212.57 H 605.48 v -43.058 z"
+           d="M 350.561,169.512 H 107.121 V 212.57 H 593.972 V 169.512 Z"
            style="fill:#729fcf;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path32" />
         <g
            id="g34">
           <path
-             d="M 364.819,169.512 H 124.157 V 212.57 H 605.48 v -43.058 z"
+             d="M 350.561,169.512 H 107.121 V 212.57 H 593.972 V 169.512 Z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path36" />
         </g>
         <path
-           d="M 364.819,230.343 H 124.157 v 43.37 H 605.48 v -43.37 z"
+           d="m 350.561,230.343 h -243.44 v 43.37 h 486.851 v -43.37 z"
            style="fill:#a1467e;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path38" />
         <g
            id="g40">
           <path
-             d="M 364.819,230.343 H 124.157 v 43.37 H 605.48 v -43.37 z"
+             d="m 350.561,230.343 h -243.44 v 43.37 h 486.851 v -43.37 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path42" />
         </g>
         <path
-           d="M 201.969,233.603 H 142.781 V 255.43 H 261.156 V 233.603 Z"
+           d="m 168.491,233.603 h -42.746 v 21.827 h 85.464 v -21.827 z"
            style="fill:#e0c2cd;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path44" />
         <g
            id="g46">
           <path
-             d="M 201.969,233.603 H 142.781 V 255.43 H 261.156 V 233.603 Z"
+             d="m 168.491,233.603 h -42.746 v 21.827 h 85.464 v -21.827 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path48" />
         </g>
@@ -162,7 +162,7 @@
            id="g50">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,181.616,246.217)"
+             transform="matrix(1,0,0,-1,148.11,246.217)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text54"><tspan
                x="0 2.254308 8.0259762 13.773662 16.027969 18.314255 23.206581 26.316248 28.602531 33.023212 37.467876"
@@ -174,7 +174,7 @@
            id="g56">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,169.739,237.203)"
+             transform="matrix(1,0,0,-1,136.233,237.203)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text60"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 17.458897 21.903561 26.324242 28.130886 32.551567 36.620514 41.065178 42.871822 47.292503 51.737167 55.806114 59.875061"
@@ -183,13 +183,13 @@
                id="tspan58">e.g. indi_v4l2_ccd</tspan></text>
         </g>
         <path
-           d="m 201.969,172.658 h -59.188 v 23.981 h 118.375 v -23.981 z"
+           d="m 168.491,172.658 h -42.746 v 23.981 h 85.464 v -23.981 z"
            style="fill:#b4c7dc;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path62" />
         <g
            id="g64">
           <path
-             d="m 201.969,172.658 h -59.188 v 23.981 h 118.375 v -23.981 z"
+             d="m 168.491,172.658 h -42.746 v 23.981 h 85.464 v -23.981 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path66" />
         </g>
@@ -197,7 +197,7 @@
            id="g68">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,174.217,186.35)"
+             transform="matrix(1,0,0,-1,140.74,186.35)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text72"><tspan
                x="0 4.924304 7.1786122 12.102916 16.995243 21.439907 23.694216 28.618521 33.039204 37.483868 39.738174 44.182838 48.627502 50.881809"
@@ -209,7 +209,7 @@
            id="g74">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,170.504,177.335)"
+             transform="matrix(1,0,0,-1,137.027,177.335)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text78"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 17.938536 22.3832 26.803883 30.872828 33.159111 35.413422 37.699703 41.744667 47.516335 52.888306 58.292248"
@@ -218,13 +218,13 @@
                id="tspan76">e.g. /dev/ttyUSB0</tspan></text>
         </g>
         <path
-           d="m 201.969,111.657 h -59.188 v 22.62 h 118.375 v -22.62 z"
+           d="m 168.491,111.657 h -42.746 v 22.62 h 85.464 v -22.62 z"
            style="fill:#afd095;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path80" />
         <g
            id="g82">
           <path
-             d="m 201.969,111.657 h -59.188 v 22.62 h 118.375 v -22.62 z"
+             d="m 168.491,111.657 h -42.746 v 22.62 h 85.464 v -22.62 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path84" />
         </g>
@@ -232,7 +232,7 @@
            id="g86">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,166.734,124.668)"
+             transform="matrix(1,0,0,-1,133.228,124.668)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text90"><tspan
                x="0 5.7476859 10.19235 13.302016 18.194344 24.445652 28.866335 31.976 36.420666 38.674973 43.599277 48.043941 52.464622 54.750908 59.171589 63.616253 65.87056"
@@ -244,7 +244,7 @@
            id="g92">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,174.416,115.654)"
+             transform="matrix(1,0,0,-1,140.91,115.654)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text96"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 21.431913 26.803883 32.207825 34.462135 38.906799 43.32748 45.989483 48.24379 50.498096"
@@ -253,32 +253,32 @@
                id="tspan94">e.g. USB port 1</tspan></text>
         </g>
         <path
-           d="M 201.969,226.885 V 203.357"
+           d="M 168.491,226.885 V 203.357"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path98" />
         <path
-           d="m 198.369,226.403 3.6,7.2 3.6,-7.2 z"
+           d="m 164.891,226.403 3.6,7.2 3.6,-7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path100" />
         <path
-           d="m 205.569,203.839 -3.6,-7.2 -3.6,7.2 z"
+           d="m 172.091,203.839 -3.6,-7.2 -3.6,7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path102" />
         <path
-           d="M 201.969,165.94 V 140.995"
+           d="M 168.491,165.94 V 140.995"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path104" />
         <path
-           d="m 198.369,165.458 3.6,7.2 3.6,-7.2 z"
+           d="m 164.891,165.458 3.6,7.2 3.6,-7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path106" />
         <path
-           d="m 205.569,141.477 -3.6,-7.2 -3.6,7.2 z"
+           d="m 172.091,141.477 -3.6,-7.2 -3.6,7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path108" />
         <g
            id="g110"
-           transform="matrix(50.145,0,0,41.839,171.865,32.457)">
+           transform="matrix(50.145,0,0,41.839,137.849,32.457)">
           <image
              width="1"
              height="1"
@@ -293,7 +293,7 @@
            id="g118">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,158.797,28.261)"
+             transform="matrix(1,0,0,-1,124.781,28.261)"
              style="font-variant:normal;font-weight:bold;font-size:11.991px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text122"><tspan
                x="0 8.6335201 15.336489 19.30551 23.970009 31.272528 34.606026 41.332977 48.035946 58.683952 65.386925 70.075401"
@@ -303,7 +303,7 @@
         </g>
         <g
            id="g124"
-           transform="matrix(41.528,0,0,41.528,319.946,35.717)">
+           transform="matrix(41.528,0,0,41.528,249.08,35.717)">
           <image
              width="1"
              height="1"
@@ -318,7 +318,7 @@
            id="g132">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,304.894,28.261)"
+             transform="matrix(1,0,0,-1,234.028,28.261)"
              style="font-variant:normal;font-weight:bold;font-size:11.991px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text136"><tspan
                x="0 7.3025188 14.605038 21.331989 28.634508 35.337479 38.670975 49.342964 56.645485 60.614506 67.917023"
@@ -328,7 +328,7 @@
         </g>
         <g
            id="g138"
-           transform="matrix(36.312,0,0,36.312,502.639,38.296)">
+           transform="matrix(36.312,0,0,36.312,374.4,38.296)">
           <image
              width="1"
              height="1"
@@ -343,7 +343,7 @@
            id="g146">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,487.814,28.261)"
+             transform="matrix(1,0,0,-1,359.575,28.261)"
              style="font-variant:normal;font-weight:bold;font-size:11.991px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text150"><tspan
                x="0 7.3025188 10.659999 13.993497 17.962519 24.665487 29.329987 32.687466 42.028454 49.330975 56.033943 62.736912"
@@ -352,25 +352,25 @@
                id="tspan148">Filter wheel</tspan></text>
         </g>
         <path
-           d="M 202.025,104.939 202.28,80.986"
+           d="M 168.463,104.939 168.35,80.986"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path152" />
         <path
-           d="m 198.454,104.428 3.515,7.229 3.656,-7.172 z"
+           d="m 164.863,104.485 3.628,7.172 3.572,-7.229 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path154" />
         <path
-           d="m 205.852,81.496 -3.515,-7.228 -3.657,7.171 z"
+           d="m 171.95,81.439 -3.629,-7.171 -3.571,7.228 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path156" />
         <path
-           d="M 346.564,233.603 H 287.802 V 255.43 H 405.326 V 233.603 Z"
+           d="m 276.151,233.603 h -50.74 v 21.827 h 101.452 v -21.827 z"
            style="fill:#e0c2cd;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path158" />
         <g
            id="g160">
           <path
-             d="M 346.564,233.603 H 287.802 V 255.43 H 405.326 V 233.603 Z"
+             d="m 276.151,233.603 h -50.74 v 21.827 h 101.452 v -21.827 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path162" />
         </g>
@@ -378,7 +378,7 @@
            id="g164">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,326.211,246.217)"
+             transform="matrix(1,0,0,-1,255.77,246.217)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text168"><tspan
                x="0 2.254308 8.0259762 13.773662 16.027969 18.314255 23.206581 26.316248 28.602531 33.023212 37.467876"
@@ -390,7 +390,7 @@
            id="g170">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,303.165,237.203)"
+             transform="matrix(1,0,0,-1,232.724,237.203)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text174"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 17.458897 21.903561 26.324242 28.130886 32.551567 39.282516 43.703197 48.147861 52.568542 54.375187 56.149857 58.436138 62.880802 67.301483 69.587769 74.008453 78.0774 82.522064"
@@ -399,13 +399,13 @@
                id="tspan172">e.g. indi_moonlite_focus</tspan></text>
         </g>
         <path
-           d="m 346.564,172.658 h -58.762 v 23.981 h 117.524 v -23.981 z"
+           d="m 276.151,172.658 h -50.74 v 23.981 h 101.452 v -23.981 z"
            style="fill:#b4c7dc;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path176" />
         <g
            id="g178">
           <path
-             d="m 346.564,172.658 h -58.762 v 23.981 h 117.524 v -23.981 z"
+             d="m 276.151,172.658 h -50.74 v 23.981 h 101.452 v -23.981 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path180" />
         </g>
@@ -413,7 +413,7 @@
            id="g182">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,318.813,186.35)"
+             transform="matrix(1,0,0,-1,248.4,186.35)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text186"><tspan
                x="0 4.924304 7.1786122 12.102916 16.995243 21.439907 23.694216 28.618521 33.039204 37.483868 39.738174 44.182838 48.627502 50.881809"
@@ -425,7 +425,7 @@
            id="g188">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,315.099,177.335)"
+             transform="matrix(1,0,0,-1,244.687,177.335)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text192"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 17.938536 22.3832 26.803883 30.872828 33.159111 35.413422 37.699703 41.744667 47.516335 52.888306 58.292248"
@@ -434,13 +434,13 @@
                id="tspan190">e.g. /dev/ttyUSB1</tspan></text>
         </g>
         <path
-           d="m 346.564,111.657 h -58.762 v 22.62 h 117.524 v -22.62 z"
+           d="m 276.151,111.657 h -50.74 v 22.62 h 101.452 v -22.62 z"
            style="fill:#afd095;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path194" />
         <g
            id="g196">
           <path
-             d="m 346.564,111.657 h -58.762 v 22.62 h 117.524 v -22.62 z"
+             d="m 276.151,111.657 h -50.74 v 22.62 h 101.452 v -22.62 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path198" />
         </g>
@@ -448,7 +448,7 @@
            id="g200">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,311.329,124.668)"
+             transform="matrix(1,0,0,-1,240.888,124.668)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text204"><tspan
                x="0 5.7476859 10.19235 13.302016 18.194344 24.445652 28.866335 31.976 36.420666 38.674973 43.599277 48.043941 52.464622 54.750908 59.171589 63.616253 65.87056"
@@ -460,7 +460,7 @@
            id="g206">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,319.011,115.654)"
+             transform="matrix(1,0,0,-1,248.57,115.654)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text210"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 21.431913 26.803883 32.207825 34.462135 38.906799 43.32748 45.989483 48.24379 50.498096"
@@ -469,46 +469,46 @@
                id="tspan208">e.g. USB port 2</tspan></text>
         </g>
         <path
-           d="M 346.564,226.885 V 203.357"
+           d="M 276.151,226.885 V 203.357"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path212" />
         <path
-           d="m 342.964,226.403 3.6,7.2 3.6,-7.2 z"
+           d="m 272.551,226.403 3.6,7.2 3.6,-7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path214" />
         <path
-           d="m 350.164,203.839 -3.6,-7.2 -3.6,7.2 z"
+           d="m 279.751,203.839 -3.6,-7.2 -3.6,7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path216" />
         <path
-           d="M 346.564,165.94 V 140.995"
+           d="M 276.151,165.94 V 140.995"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path218" />
         <path
-           d="m 342.964,165.458 3.6,7.2 3.6,-7.2 z"
+           d="m 272.551,165.458 3.6,7.2 3.6,-7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path220" />
         <path
-           d="m 350.164,141.477 -3.6,-7.2 -3.6,7.2 z"
+           d="m 279.751,141.477 -3.6,-7.2 -3.6,7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path222" />
         <path
-           d="m 346.734,104.939 0.482,-21.005"
+           d="m 276.236,104.939 0.199,-21.005"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path224" />
         <path
-           d="m 343.134,104.372 3.43,7.285 3.77,-7.115 z"
+           d="m 272.636,104.428 3.515,7.229 3.685,-7.172 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path226" />
         <path
-           d="m 350.816,84.501 -3.43,-7.285 -3.77,7.115 z"
+           d="m 280.035,84.444 -3.515,-7.228 -3.685,7.171 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path228" />
         <g
            id="g230">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,36.964,125.15)"
+             transform="matrix(1,0,0,-1,19.956,125.15)"
              style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text234"><tspan
                x="0 12.96 22.931999 28.908001 38.880001 51.84 61.793999 67.788002"
@@ -520,7 +520,7 @@
            id="g236">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,42.491,183.345)"
+             transform="matrix(1,0,0,-1,25.483,183.345)"
              style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text240"><tspan
                x="0 9.9540005 13.914 23.868 33.84 42.821999 47.844002 61.866001"
@@ -532,7 +532,7 @@
            id="g242">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,22.706,245.424)"
+             transform="matrix(1,0,0,-1,5.698,245.424)"
              style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text246"><tspan
                x="0 5.0219998 17.982 30.941999 35.964001 40.986 49.967999 59.939999 65.916 74.916 84.870003"
@@ -541,13 +541,13 @@
                id="tspan244">INDI server</tspan></text>
         </g>
         <path
-           d="M 527.811,233.603 H 469.02 v 21.827 h 117.553 v -21.827 z"
+           d="m 399.628,233.603 h -43.993 v 21.827 h 87.959 v -21.827 z"
            style="fill:#e0c2cd;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path248" />
         <g
            id="g250">
           <path
-             d="M 527.811,233.603 H 469.02 v 21.827 h 117.553 v -21.827 z"
+             d="m 399.628,233.603 h -43.993 v 21.827 h 87.959 v -21.827 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path252" />
         </g>
@@ -555,7 +555,7 @@
            id="g254">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,507.43,246.217)"
+             transform="matrix(1,0,0,-1,379.247,246.217)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text258"><tspan
                x="0 2.254308 8.0259762 13.773662 16.027969 18.314255 23.206581 26.316248 28.602531 33.023212 37.467876"
@@ -567,7 +567,7 @@
            id="g260">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,492.491,237.203)"
+             transform="matrix(1,0,0,-1,364.309,237.203)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text264"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 17.458897 21.903561 26.324242 28.130886 32.551567 36.996231 39.282516 41.057182 45.126129 49.570793 55.318481 59.739162 64.183823 68.628487"
@@ -576,13 +576,13 @@
                id="tspan262">e.g. indi_atik_wheel</tspan></text>
         </g>
         <path
-           d="M 527.811,172.658 H 469.02 v 23.981 h 117.553 v -23.981 z"
+           d="m 399.628,172.658 h -43.993 v 23.981 h 87.959 v -23.981 z"
            style="fill:#b4c7dc;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path266" />
         <g
            id="g268">
           <path
-             d="M 527.811,172.658 H 469.02 v 23.981 h 117.553 v -23.981 z"
+             d="m 399.628,172.658 h -43.993 v 23.981 h 87.959 v -23.981 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path270" />
         </g>
@@ -590,7 +590,7 @@
            id="g272">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,499.408,186.35)"
+             transform="matrix(1,0,0,-1,371.225,186.35)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text276"><tspan
                x="0 4.924304 7.1786122 12.102916 16.995243 21.439907 23.694216 28.618521 33.039204 37.483868 39.738174 44.182838 48.627502 50.881809"
@@ -602,7 +602,7 @@
            id="g278">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,496.346,177.335)"
+             transform="matrix(1,0,0,-1,368.164,177.335)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text282"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 17.938536 22.3832 26.803883 30.872828 33.159111 35.413422 37.699703 41.744667 47.516335 52.888306 58.292248"
@@ -611,13 +611,13 @@
                id="tspan280">e.g. /dev/ttyUSBn</tspan></text>
         </g>
         <path
-           d="M 527.811,111.657 H 469.02 v 22.62 h 117.553 v -22.62 z"
+           d="m 399.628,111.657 h -43.993 v 22.62 h 87.959 v -22.62 z"
            style="fill:#afd095;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path284" />
         <g
            id="g286">
           <path
-             d="M 527.811,111.657 H 469.02 v 22.62 h 117.553 v -22.62 z"
+             d="m 399.628,111.657 h -43.993 v 22.62 h 87.959 v -22.62 z"
              style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path288" />
         </g>
@@ -625,7 +625,7 @@
            id="g290">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,491.896,124.668)"
+             transform="matrix(1,0,0,-1,363.713,124.668)"
              style="font-variant:normal;font-weight:bold;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans-Bold;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text294"><tspan
                x="0 5.7476859 10.19235 13.302016 18.194344 24.445652 28.866335 31.976 36.420666 38.674973 43.599277 48.043941 52.464622 54.750908 59.171589 63.616253 65.87056"
@@ -637,7 +637,7 @@
            id="g296">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,499.578,115.654)"
+             transform="matrix(1,0,0,-1,371.395,115.654)"
              style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text300"><tspan
                x="0 4.444664 6.6989722 11.143636 13.397944 15.684228 21.431913 26.803883 32.207825 34.462135 38.906799 43.32748 45.989483 48.24379 50.498096"
@@ -646,46 +646,46 @@
                id="tspan298">e.g. USB port N</tspan></text>
         </g>
         <path
-           d="M 527.811,226.885 V 203.357"
+           d="M 399.628,226.885 V 203.357"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path302" />
         <path
-           d="m 524.211,226.403 3.6,7.2 3.6,-7.2 z"
+           d="m 396.028,226.403 3.6,7.2 3.6,-7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path304" />
         <path
-           d="m 531.411,203.839 -3.6,-7.2 -3.6,7.2 z"
+           d="m 403.228,203.839 -3.6,-7.2 -3.6,7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path306" />
         <path
-           d="M 527.811,165.94 V 140.995"
+           d="M 399.628,165.94 V 140.995"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path308" />
         <path
-           d="m 524.211,165.458 3.6,7.2 3.6,-7.2 z"
+           d="m 396.028,165.458 3.6,7.2 3.6,-7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path310" />
         <path
-           d="m 531.411,141.477 -3.6,-7.2 -3.6,7.2 z"
+           d="m 403.228,141.477 -3.6,-7.2 -3.6,7.2 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path312" />
         <path
-           d="m 527.868,104.939 0.141,-23.641"
+           d="m 399.657,104.939 0.141,-23.641"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path314" />
         <path
-           d="m 524.268,104.428 3.543,7.229 3.657,-7.172 z"
+           d="m 396.057,104.428 3.571,7.229 3.629,-7.172 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path316" />
         <path
-           d="m 531.609,81.808 -3.543,-7.228 -3.657,7.171 z"
+           d="m 403.398,81.808 -3.571,-7.228 -3.629,7.171 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path318" />
         <g
            id="g320">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,427.521,182.098)"
+             transform="matrix(1,0,0,-1,336.813,182.098)"
              style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text324"><tspan
                x="0 5.0219998 10.044"
@@ -697,7 +697,7 @@
            id="g326">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,427.521,119.452)"
+             transform="matrix(1,0,0,-1,336.813,119.452)"
              style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text330"><tspan
                x="0 5.0219998 10.044"
@@ -709,7 +709,7 @@
            id="g332">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,427.521,241.398)"
+             transform="matrix(1,0,0,-1,336.813,241.398)"
              style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text336"><tspan
                x="0 5.0219998 10.044"
@@ -718,85 +718,160 @@
                id="tspan334">...</tspan></text>
         </g>
         <path
-           d="m 593.32,244.517 27.354,0.028"
+           d="m 450.34,244.517 198.68,0.028"
            style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
            id="path338" />
         <path
-           d="m 593.802,240.917 -7.2,3.6 7.2,3.6 z"
+           d="m 450.822,240.917 -7.2,3.6 7.2,3.6 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path340" />
         <path
-           d="m 620.192,248.145 7.2,-3.6 -7.2,-3.6 z"
+           d="m 648.539,248.145 7.2,-3.6 -7.2,-3.6 z"
            style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path342" />
-        <path
-           d="m 637.852,234.085 h -10.46 v 20.948 h 20.92 v -20.948 z"
-           style="fill:#729fcf;fill-opacity:1;fill-rule:evenodd;stroke:none"
-           id="path344" />
         <g
-           id="g346">
-          <path
-             d="m 637.852,234.085 h -10.46 v 20.948 h 20.92 v -20.948 z"
-             style="fill:none;stroke:#3465a4;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             id="path348" />
+           id="g344">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,504.964,237.231)"
+             style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text348"><tspan
+               x="0 4.6684961 9.3369923 16.043959 20.488623 24.933287 26.707954 28.962261 33.406925 36.044945 38.33123 40.585537 46.333225 52.104893 54.3592 56.613506 61.05817 65.502838 69.571785 71.346451 75.415398 79.860062 84.528557"
+               y="0"
+               sodipodi:role="line"
+               id="tspan346">&lt;&lt;monitor INDI device&gt;&gt;</tspan></text>
         </g>
         <path
-           d="m 637.852,173.991 h -10.46 v 20.948 h 20.92 v -20.948 z"
+           d="m 666.198,234.085 h -10.459 v 20.948 h 20.919 v -20.948 z"
            style="fill:#729fcf;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path350" />
         <g
            id="g352">
           <path
-             d="m 637.852,173.991 h -10.46 v 20.948 h 20.92 v -20.948 z"
+             d="m 666.198,234.085 h -10.459 v 20.948 h 20.919 v -20.948 z"
              style="fill:none;stroke:#3465a4;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
              id="path354" />
         </g>
         <path
-           d="m 593.32,184.62 27.354,-0.141"
-           style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           d="m 666.198,169.002 h -10.459 v 20.948 h 20.919 v -20.948 z"
+           style="fill:#729fcf;fill-opacity:1;fill-rule:evenodd;stroke:none"
            id="path356" />
-        <path
-           d="m 593.773,181.02 -7.171,3.629 7.228,3.571 z"
-           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
-           id="path358" />
-        <path
-           d="m 620.22,188.079 7.172,-3.629 -7.228,-3.571 z"
-           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
-           id="path360" />
-        <path
-           d="M 700.328,170.079 H 627.08 v 87.137 h 146.495 v -87.137 z"
-           style="fill:#d4ea6b;fill-opacity:1;fill-rule:evenodd;stroke:none"
-           id="path362" />
         <g
-           id="g364">
+           id="g358">
           <path
-             d="M 700.328,170.079 H 627.08 v 87.137 h 146.495 v -87.137 z"
+             d="m 666.198,169.002 h -10.459 v 20.948 h 20.919 v -20.948 z"
              style="fill:none;stroke:#3465a4;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
-             id="path366" />
+             id="path360" />
         </g>
+        <path
+           d="m 450.34,179.008 198.68,0.425"
+           style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           id="path362" />
+        <path
+           d="m 450.822,175.408 -7.2,3.572 7.2,3.628 z"
+           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+           id="path364" />
+        <path
+           d="m 648.539,183.033 7.2,-3.572 -7.2,-3.628 z"
+           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+           id="path366" />
         <g
            id="g368">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,653.868,217.474)"
-             style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             transform="matrix(1,0,0,-1,503.405,171.921)"
+             style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text372"><tspan
+               x="0 4.6684961 9.3369923 16.043959 20.488623 24.933287 26.707954 28.962261 33.406925 36.044945 38.33123 42.751911 44.558556 48.979237 53.423901 57.492847 59.747154 64.191818 68.636482 72.705429 74.480095 78.549042 82.993706 87.662201"
+               y="0"
+               sodipodi:role="line"
+               id="tspan370">&lt;&lt;monitor Linux device&gt;&gt;</tspan></text>
+        </g>
+        <path
+           d="m 712.8,164.806 h -57.373 v 92.438 h 114.746 v -92.438 z"
+           style="fill:#d4ea6b;fill-opacity:1;fill-rule:evenodd;stroke:none"
+           id="path374" />
+        <g
+           id="g376">
+          <path
+             d="m 712.8,164.806 h -57.373 v 92.438 h 114.746 v -92.438 z"
+             style="fill:none;stroke:#3465a4;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path378" />
+        </g>
+        <g
+           id="g380">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,666.34,214.866)"
+             style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text384"><tspan
                x="0 5.0219998 17.982 30.941999 35.964001 40.986 50.939999 60.911999 69.893997 73.853996 82.835999"
                y="0"
                sodipodi:role="line"
-               id="tspan370">INDI device</tspan></text>
+               id="tspan382">INDI device</tspan></text>
         </g>
         <g
-           id="g374">
+           id="g386">
           <text
              xml:space="preserve"
-             transform="matrix(1,0,0,-1,661.918,197.32)"
+             transform="matrix(1,0,0,-1,674.391,194.712)"
              style="font-variant:normal;font-weight:normal;font-size:18px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
-             id="text378"><tspan
+             id="text390"><tspan
                x="0 12.96 22.931999 27.936001 36.936001 46.889999 56.862 66.816002"
                y="0"
                sodipodi:role="line"
-               id="tspan376">watchdog</tspan></text>
+               id="tspan388">watchdog</tspan></text>
+        </g>
+        <path
+           d="m 515.509,184.45 h -46.46 v 15.052 h 92.92 V 184.45 Z"
+           style="fill:#b4c7dc;fill-opacity:1;fill-rule:evenodd;stroke:none"
+           id="path392" />
+        <g
+           id="g394">
+          <path
+             d="m 515.509,184.45 h -46.46 v 15.052 h 92.92 V 184.45 Z"
+             style="fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+             id="path396" />
+        </g>
+        <g
+           id="g398">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,479.906,189.184)"
+             style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text402"><tspan
+               x="0 2.254308 4.5405922 11.247558 15.692222 17.946529 19.753174 24.173857 28.618521 30.393188 34.462135 38.906799 41.544819 45.613766 50.05843 52.696449 57.588776 59.875061 64.767387"
+               y="0"
+               sodipodi:role="line"
+               id="tspan400">/tmp/indiserverFIFO</tspan></text>
+        </g>
+        <path
+           d="m 515.339,199.474 v 24.151"
+           style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           id="path404" />
+        <path
+           d="m 511.739,223.143 3.6,7.2 3.6,-7.2 z"
+           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+           id="path406" />
+        <path
+           d="m 561.969,194.4 h 86.74"
+           style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+           id="path408" />
+        <path
+           d="m 648.227,198 7.2,-3.6 -7.2,-3.6 z"
+           style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none"
+           id="path410" />
+        <g
+           id="g412">
+          <text
+             xml:space="preserve"
+             transform="matrix(1,0,0,-1,564.945,187.087)"
+             style="font-variant:normal;font-weight:normal;font-size:7.994px;font-family:'Liberation Sans';-inkscape-font-specification:LiberationSans;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+             id="text416"><tspan
+               x="0 4.6684961 9.3369923 15.084678 19.529343 23.974007 26.228313 28.866335 33.310997 35.085667 37.371948 39.626259 45.373943 51.145611 53.399921 55.686203 59.731167 64.175835 66.81385 70.882797 75.327461 77.965485 82.63398"
+               y="0"
+               sodipodi:role="line"
+               id="tspan414">&lt;&lt;Control INDI server&gt;&gt;</tspan></text>
         </g>
       </g>
     </g>

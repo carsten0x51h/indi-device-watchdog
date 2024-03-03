@@ -1,2 +1,2 @@
--Update README.md documentation + add architecture / overview image.
 -Add unit tests for watchdog logic?
+-Change program so that handling of /tmp/indiserverFIFO is optional
