@@ -109,7 +109,7 @@ To tell the INDI device watchdog which INDI devices and corresponding Linux devi
 }
 ```
 
-### Controlling the INDI server{#custom-id}
+### Controlling the INDI server{#custom_id}
 
 TODO: Describe creation of INDI server pipe /tmp/indiserverFIFO....
 ...
