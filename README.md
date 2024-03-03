@@ -14,7 +14,7 @@ TODO...
 ## System overview
 TODO...
 
-![INDI Device Watchdog System Overview](doc/images/indi-device-watchdog-overview.jpeg)
+![INDI Device Watchdog System Overview](doc/images/indi-device-watchdog-overview.svg)
 
 ## Further information
 Please visit my blog https://www.lost-infinity.com for further details. The first article I published about this project can be found here: https://www.lost-infinity.com/indi-device-watchdog
@@ -59,6 +59,43 @@ or to build parallel on e.g. 12 cores, run
 
 ### Create device configuration
 TODO
+
+```
+{
+    "indiDevices": [
+        {
+            "indiDeviceName": "Joystick",
+            "linuxDeviceName": "\/dev\/input\/js0",
+            "indiDeviceDriverName": "indi_joystick",
+            "enableAutoConnect": "true"
+        },
+        {
+            "indiDeviceName": "V4L2 CCD",
+            "linuxDeviceName": "\/dev\/video1",
+            "indiDeviceDriverName": "indi_v4l2_ccd",
+            "enableAutoConnect": "true"
+        },
+        {
+            "indiDeviceName": "MoonLite",
+            "linuxDeviceName": "\/dev\/serial\/by-id\/usb-FTDI_FT232R_USB_UART_A400rRDV-if00-port0",
+            "indiDeviceDriverName": "indi_moonlite_focus",
+            "enableAutoConnect": "true"
+        },
+        {
+            "indiDeviceName": "Atik EFW2",
+            "linuxDeviceName": "\/dev\/hidraw81",
+            "indiDeviceDriverName": "indi_atik_wheel",
+            "enableAutoConnect": "true"
+        },
+        {
+            "indiDeviceName": "EQMod Mount",
+            "linuxDeviceName": "\/dev\/serial\/by-id\/usb-FTDI_FT232R_USB_UART_A600ztuh-if00-port0",
+            "indiDeviceDriverName": "indi_eqmod_telescope",
+            "enableAutoConnect": "true"
+        }
+    ]
+}
+```
 
 ### Controlling the INDI server
 TODO: Describe creation of INDI server pipe /tmp/indiserverFIFO....
