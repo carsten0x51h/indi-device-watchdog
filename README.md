@@ -28,7 +28,7 @@ For other Linux distributions the package names may slightly vary.
 
 	sudo apt-get update
 	sudo apt-get install zlib1g-dev libindi-dev libboost-dev \
-	                     libboost-log-dev libboost-system-dev \
+	                     libboost-log-dev libboost-system-dev libboost-regex-dev \
 	                     libboost-program-options-dev \
 	                     libboost-test-dev clang-tidy
 
@@ -58,7 +58,7 @@ or to build parallel on e.g. 12 cores, run
 	cmake --build . -j12 -- all
 
 ### Create device configuration
-TODO
+To tell the INDI device watchdog which INDI devices and corresponding Linux devices it should monitor, a JSON configuration is used. An example of such file is shown below. In addition for each device the corresponding INDI driver name shall be specified to allow restart of this driver if necessary (unfortunately this information is currently not available from INDI under all given circumstances). Furthermore, for each entry the option if automatically connecting the INDI device is available. When enabled the INDI device watchdog tries to connect the respective INDI device. 
 
 ```
 {
@@ -91,7 +91,7 @@ TODO
             "indiDeviceName": "EQMod Mount",
             "linuxDeviceName": "\/dev\/serial\/by-id\/usb-FTDI_FT232R_USB_UART_A600ztuh-if00-port0",
             "indiDeviceDriverName": "indi_eqmod_telescope",
-            "enableAutoConnect": "true"
+            "enableAutoConnect": "false"
         }
     ]
 }
@@ -100,6 +100,31 @@ TODO
 ### Controlling the INDI server
 TODO: Describe creation of INDI server pipe /tmp/indiserverFIFO....
 ...
+
+To achieve that two simple steps are required.
+
+1. Create a pipe - e.g. in the /tmp folder:
+
+```
+sudo mkfifo /tmp/indiserverFIFO
+sudo chmod 664 /tmp/indiserverFIFO
+```
+
+2. Start the INDI server with the -f option passing the name of the pipe which you hust created. 
+
+```
+sudo indiserver -f /tmp/indiserverFIFO <Your INDI drivers>
+```
+
+To send commands to the INDI server you can now simply write to the pipe. For example to stop and start the "indi_v4l2_ccd" INDI driver without restarting the entire INDI server, the following commands can be used:
+
+```
+sudo echo "stop indi_v4l2_ccd" > /tmp/indiserverFIFO
+sudo echo "start indi_v4l2_ccd" > /tmp/indiserverFIFO
+```
+
+The INDI device watchdog makes use of this mechanism to restart an INDI driver in case the corresponding Linux device exists but the INDI device does not.
+
 
 
 ### Run the INDI device watcdog
