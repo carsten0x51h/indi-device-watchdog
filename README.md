@@ -127,7 +127,7 @@ The INDI device watchdog makes use of this mechanism to restart an INDI driver i
 
 
 
-### Run the INDI device watcdog
+### Run the INDI device watchdog
 To run the INDI device watchdog the first time simply execute the following command to get an overview of the options:
 
 ```
