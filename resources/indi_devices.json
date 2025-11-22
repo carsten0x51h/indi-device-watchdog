@@ -32,7 +32,7 @@
         },
         {
             "indiDeviceName": "EQMod Mount",
-            "linuxDeviceName": "\/dev\/serial\/by-id\/usb-FTDI_FT232R_USB_UART_A800enuj-if00-port0",
+            "linuxDeviceName": "\/dev\/serial\/by-id\/usb-Prolific_Technology_Inc._USB-Serial_Controller_A_CJb11BS14-if00-port0",
             "indiDeviceDriverName": "indi_eqmod_telescope",
             "enableAutoConnect": "true"
         }
